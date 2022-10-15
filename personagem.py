@@ -193,13 +193,13 @@ class Animation():
 
 murasaki = Personagem()
 
-murasaki.animations.idle.set( '..//characters//murasaki//idle' )
+murasaki.animations.idle.set( 'characters//murasaki//idle' )
 murasaki.animations.idle.configura(0)
 murasaki.animations.idle.turnOn()
 
 murasaki.animations.walking = Animation()
 murasaki.current_animation = murasaki.animations.walking
-murasaki.current_animation.set( '..//characters//murasaki//andando' )
+murasaki.current_animation.set( 'characters//murasaki//andando' )
 murasaki.current_animation.configura(6)
 murasaki.current_animation.turnOn()
 
@@ -210,13 +210,13 @@ murasaki.rect.left = 0
 drexa = Personagem()
 
 drexa.current_animation = drexa.animations.idle
-drexa.current_animation.set( '..//characters//drexa//ataque' )
+drexa.current_animation.set( 'characters//drexa//ataque' )
 drexa.current_animation.configura(0)
 drexa.current_animation.turnOn()
 
 
 drexa.current_animation = drexa.animations.walking
-drexa.current_animation.set( '..//characters//drexa//walking' )
+drexa.current_animation.set( 'characters//drexa//walking' )
 drexa.current_animation.configura(0)
 drexa.current_animation.turnOn()
 
@@ -240,11 +240,11 @@ monstrinho.movimentacao_cossenoidal.set_frequencia( 0.3 )
 monstrinho.movimentacao_cossenoidal.set_amplitude( 100 )
 
 monstrinho.current_animation = monstrinho.animations.idle
-monstrinho.current_animation.set( '..\characters\pequeno mago\idle' )
+monstrinho.current_animation.set( 'characters\pequeno mago\idle' )
 monstrinho.current_animation.configura(0)
 monstrinho.current_animation.turnOn()
 
-monstrinho.animations.walking.set( '..\characters\pequeno mago\idle' )
+monstrinho.animations.walking.set( 'characters\pequeno mago\idle' )
 monstrinho.animations.walking.configura(0)
 monstrinho.animations.walking.turnOn()
 
