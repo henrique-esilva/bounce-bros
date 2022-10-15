@@ -7,13 +7,13 @@ from personagem import Animation
 
 
 animacoes = {
-    'fumaca': '../efects/fumaca/padrao/'
+    'fumaca': 'efects/fumaca/padrao/'
 }
 
 
 class ObjetoEfemero ():
 
-    def __init__(self, posicao, path = '../efects/fumaca/padrao/' ):
+    def __init__(self, posicao, path = 'efects/fumaca/padrao/' ):
         self.current_animation = Animation()
 
         self.current_animation.set( path )
