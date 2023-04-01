@@ -6,10 +6,10 @@ import objetos
 
 imagem_coracao = pygame.image.load( "efeitos\\coracao.png" )
 
-murasaki.funcoes =  [gravidade, rebate, colisao_com_plataformas, efeito_de_giro, renderiza_personagem]
-drexa.funcoes =     [gravidade, rebate, colisao_com_plataformas, efeito_de_giro, renderiza_personagem]
+murasaki.funcoes =  [gravidade, rebate, colisao_com_plataformas, renderiza_personagem]
+drexa.funcoes =     [gravidade, rebate, colisao_com_plataformas, renderiza_personagem]
 arquimago.funcoes = [gravidade, colisao_com_plataformas, renderiza_personagem]
-cyber.funcoes =     [gravidade, rebate, colisao_com_plataformas, efeito_de_giro, renderiza_personagem]
+cyber.funcoes =     [gravidade, rebate, colisao_com_plataformas, renderiza_personagem]
 maguinho.funcoes =  [gravidade, colisao_com_plataformas, renderiza_personagem]
 
 murasaki.modo_de_controle = ( controle_lateral_pula, 15 )
@@ -91,14 +91,13 @@ def main():
 
     move_todos_pela_tela()
 
-    for index in range( len( objetos.personagens ) ):
-        i = objetos.personagens[index]
-        if i == player:
-            i.modo_de_controle[0]( i, 1, i.modo_de_controle[1] )
-        elif i.modo_de_controle[0] != controle_voo:
-            desacelera_move_lateral_ajusta( i )
+    for character in objetos.personagens:
+        if character == player:
+            character.modo_de_controle[0]( character, 1, character.modo_de_controle[1] )
+        elif character.modo_de_controle[0] != controle_voo:
+            desacelera_move_lateral_ajusta( character )
         else:
-            desaceleracao_aerea( i )
+            desaceleracao_aerea( character )
 
     for i in objetos.particulas:
 

@@ -316,11 +316,11 @@ def controle_voo( personagem, key_set, limite = 30 ):
     tecla = pygame.key.get_pressed()
 
     if tecla[key_set[0]]:
-        personagem.left = True
+        #personagem.left = True
         personagem.fisica.velocidade_lateral -= 1
 
     if tecla[key_set[1]]:
-        personagem.left = False
+        #personagem.left = False
         personagem.fisica.velocidade_lateral += 1
 
     if not (tecla[key_set[0]] or tecla[key_set[1]]) and personagem.fisica.velocidade_lateral != 0:
@@ -346,6 +346,10 @@ def controle_voo( personagem, key_set, limite = 30 ):
     if personagem.fisica.velocidade_de_queda < -limite_de_velocidade:
         personagem.fisica.velocidade_de_queda = -limite_de_velocidade
 
+    personagem.left = ( 
+        personagem.fisica.velocidade_lateral < 0 
+        ) or personagem.left * (
+        personagem.fisica.velocidade_lateral == 0 )
     personagem.rect.centerx += personagem.fisica.velocidade_lateral
 
     personagem.ajusta_retangulos()
