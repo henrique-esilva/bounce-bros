@@ -20,5 +20,6 @@ def import_animation(arg, start = 0):     # O "arg"(parametro) deve ser o nome d
     if len(a) == 0:
 
         print('\nWARNING: \'import_animation()\' retornando vetor de 0 (zero) valores')
-        print('    a animação não está recebendo nenhum quadro!')
+        print('\n    caminho de busca: \'' + arg + '\'')
+        print('\n    arquivos não encontrados')
     return a
