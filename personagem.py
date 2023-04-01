@@ -233,13 +233,13 @@ murasaki.funcoes = []
 drexa = Personagem()
 
 drexa.current_animation = drexa.animations.idle
-drexa.current_animation.set( 'characters//drexa//ataque' )
+drexa.current_animation.set( 'characters//drexa//new//idle', 24)
 drexa.current_animation.configura(0)
 drexa.current_animation.turnOn()
 
 
 drexa.current_animation = drexa.animations.walking
-drexa.current_animation.set( 'characters//drexa//walking' )
+drexa.current_animation.set( 'characters//drexa//new//walk', 58 )
 drexa.current_animation.configura(0)
 drexa.current_animation.turnOn()
 
