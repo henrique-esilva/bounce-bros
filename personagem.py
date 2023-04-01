@@ -174,7 +174,7 @@ class Animation():
 		if velocidade == False:
 			velocidade = 1
 		else:
-			velocidade = math.copysign(velocidade, 1)/12
+			velocidade = math.copysign(velocidade, 1)/16
 
 		if velocidade == 0: velocidade = 1
 

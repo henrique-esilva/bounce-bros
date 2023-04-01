@@ -80,9 +80,6 @@ def gravidade( coisa ):
     coisa.rect.bottom += coisa.fisica.velocidade_de_queda
 
 
-    #if coisa.rect.bottom > renderiza.pre_tela.get_rect().height:
-    #    coisa.fisica.velocidade_de_queda = 0
-    #    coisa.rect.bottom = renderiza.pre_tela.get_rect().height
 
 
 def colisao_com_plataformas( personagem, vetor_plataformas = objetos.plataformas ):

@@ -14,9 +14,9 @@ maguinho.funcoes =  [gravidade, colisao_com_plataformas, renderiza_personagem]
 
 murasaki.modo_de_controle = ( controle_lateral_pula, 15 )
 drexa.modo_de_controle = ( controle_lateral_pula, 15 )
-arquimago.modo_de_controle = ( controle_voo, 15 )
-cyber.modo_de_controle = ( controle_lateral_pula, 15 )
-maguinho.modo_de_controle = ( controle_voo, 20 )
+arquimago.modo_de_controle = ( controle_voo, 12 )
+cyber.modo_de_controle = ( controle_lateral_pula, 14 )
+maguinho.modo_de_controle = ( controle_voo, 12 )
 
 indice_player = 0
 tempo_de_atraso_para_alternancia = 200
