@@ -273,7 +273,7 @@ monstrinho.animations.walking.configura(0)
 monstrinho.animations.walking.turnOn()
 
 monstrinho.rect = monstrinho.animations.idle.content[0].get_rect()
-monstrinho.rect.left = 800
+monstrinho.rect.left = 1000
 monstrinho.rect.bottom = 100
 
 maguinho = Personagem()
