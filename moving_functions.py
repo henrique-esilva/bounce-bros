@@ -172,7 +172,7 @@ def rebate( kk:__build_class__ ):
                         kk.fisica.velocidade_de_queda = -velocidade_do_kk
 
                     else:
-                        media = (velocidade_do_kk + i.fisica.velocidade_de_queda)/2
+                        media = (velocidade_do_kk - i.fisica.velocidade_de_queda)/2
                         kk.fisica.velocidade_de_queda = -media-12
                         i.fisica.velocidade_de_queda = media+12
                         #kk.fisica.velocidade_de_queda = -25 + i.fisica.velocidade_de_queda - math.copysign( kk.fisica.velocidade_lateral, 1 ) * 1.5
