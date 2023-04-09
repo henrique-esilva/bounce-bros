@@ -15,7 +15,8 @@ def import_animation(arg, start = 0):     # O "arg"(parametro) deve ser o nome d
 
             a.append(          pygame.image.load( patch )          )    # Aqui a imagem é importada
 
-        except:    break
+        except:
+            if len(a) > 0: break
 
     if len(a) == 0:
 

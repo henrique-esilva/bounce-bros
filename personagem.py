@@ -233,7 +233,7 @@ murasaki.funcoes = []
 drexa = Personagem()
 
 drexa.current_animation = drexa.animations.idle
-drexa.current_animation.set( 'characters//drexa//new//idle', 24)
+drexa.current_animation.set( 'characters//drexa//new//idle', 32)
 drexa.current_animation.configura(0)
 drexa.current_animation.turnOn()
 
@@ -244,7 +244,7 @@ drexa.current_animation.configura(0)
 drexa.current_animation.turnOn()
 
 drexa.rect = drexa.current_animation.content[0].get_rect()
-drexa.rect.right = 100
+drexa.rect.left = 250
 
 
 arquimago = Personagem()
