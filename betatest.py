@@ -12,7 +12,7 @@ arquimago.funcoes = [gravidade, colisao_com_plataformas, renderiza_personagem]
 cyber.funcoes =     [gravidade, rebate, colisao_com_plataformas, efeito_de_giro, renderiza_personagem]
 maguinho.funcoes =  [gravidade, colisao_com_plataformas, renderiza_personagem]
 
-murasaki.modo_de_controle = ( controle_lateral_pula, 16 )
+murasaki.modo_de_controle = ( controle_lateral_pula, 12 )
 drexa.modo_de_controle = ( controle_lateral_pula, 12 )
 arquimago.modo_de_controle = ( controle_voo, 14 )
 cyber.modo_de_controle = ( controle_lateral_pula, 8 )
@@ -20,15 +20,15 @@ maguinho.modo_de_controle = ( controle_voo, 14 )
 
     # salto base
     # mulplicador de velocidade
-murasaki.multiplicadores_de_salto = (-15, 1  )
-drexa.   multiplicadores_de_salto = (-20, 4  )
+murasaki.multiplicadores_de_salto = (-28, 1  )
+drexa.   multiplicadores_de_salto = (-30, 1.5)
 cyber.   multiplicadores_de_salto = (-30, 0  )
 
     # velocidade minima de ativação
     # multiplicador de velocidade adicional
-murasaki.multiplicadores_de_velocidade = (16, {False: 1, True:2  })
-drexa.   multiplicadores_de_velocidade = (12, {False: 1, True:0  })
-cyber.   multiplicadores_de_velocidade = (16, {False: 1, True:1.5})
+murasaki.multiplicadores_de_velocidade = (12, {False: 1, True:1.5 })
+drexa.   multiplicadores_de_velocidade = (12, {False: 1, True:1  })
+cyber.   multiplicadores_de_velocidade = (16, {False: 1, True:1  })
 
 indice_player = 0
 tempo_de_atraso_para_alternancia = 200
@@ -109,7 +109,7 @@ def main():
         elif character.modo_de_controle[0] != controle_voo:
             desacelera_move_lateral_ajusta( character )
         else:
-            movimento_aereo_passivo( character )
+            desaceleracao_aerea( character )
 
     for i in objetos.particulas:
 
