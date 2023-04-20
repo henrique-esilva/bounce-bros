@@ -240,7 +240,8 @@ def desaceleracao_aerea(kk):
 
     if kk.fisica.velocidade_de_queda != 0:
         if math.copysign(kk.fisica.velocidade_de_queda, 1) <= 1:
-            kk.fisica.velocidade_de_queda -= math.copysign( 1, kk.fisica.velocidade_de_queda )
+            kk.fisica.velocidade_de_queda = 0
+            #= math.copysign( 1, kk.fisica.velocidade_de_queda )
 
         elif math.copysign(kk.fisica.velocidade_de_queda, 1) > 1:
             kk.fisica.velocidade_de_queda -= math.copysign( 2, kk.fisica.velocidade_de_queda )

@@ -139,12 +139,12 @@ class Animation():
 	def configura(self, inicioDoLoop):
 		self.inicioDoLoop = inicioDoLoop
 
-	def set(self, path = None, start = 0 ):
+	def set(self, path = None, start = 0, end = 999 ):
 
 		if path:
 
 			self.path = path
-			self.content = graphics.import_animation( path, start )
+			self.content = graphics.import_animation( path, start, end )
 		else:
 
 			try:
@@ -233,13 +233,13 @@ murasaki.funcoes = []
 drexa = Personagem()
 
 drexa.current_animation = drexa.animations.idle
-drexa.current_animation.set( 'characters//drexa//new//idle', 32)
+drexa.current_animation.set( 'characters//drexa//new//idle', 32, 63 )
 drexa.current_animation.configura(0)
 drexa.current_animation.turnOn()
 
 
 drexa.current_animation = drexa.animations.walking
-drexa.current_animation.set( 'characters//drexa//new//walk', 58 )
+drexa.current_animation.set( 'characters//drexa//new//walk', 24 )
 drexa.current_animation.configura(0)
 drexa.current_animation.turnOn()
 

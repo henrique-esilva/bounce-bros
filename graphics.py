@@ -3,10 +3,10 @@ from pygame.locals import *
 
 #  pegar o valor de retorno com
 #  uma VAR, ok?
-def import_animation(arg, start = 0):     # O "arg"(parametro) deve ser o nome do diretório + "\\" + nome da animação. E PRONTO. O subprograma faz o resto
+def import_animation(arg, start = 0, end = 999):     # O "arg"(parametro) deve ser o nome do diretório + "\\" + nome da animação. E PRONTO. O subprograma faz o resto
     a = []
 
-    for i in range ( start , 999 ):
+    for i in range ( start , end ):
         try:
 
 
