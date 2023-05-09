@@ -181,7 +181,7 @@ def rebate( kk:__build_class__ ):
 
                         #inverte a velocidade de queda para dar o efeito de impulso
                     i.fisica.velocidade_de_queda = -i.fisica.velocidade_de_queda + velocidade_do_kk
-                        #i.vidas -= 1
+                    i.vidas -= 1
                     break
 
 def is_landed( coisa ):
