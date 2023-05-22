@@ -12,11 +12,11 @@ arquimago.funcoes = [gravidade, colisao_com_plataformas]
 cyber.funcoes =     [gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
 maguinho.funcoes =  [gravidade, colisao_com_plataformas]
 
-murasaki.modo_de_controle = ( controle_lateral_pula, 12 )
-drexa.modo_de_controle = ( controle_lateral_pula, 12 )
-arquimago.modo_de_controle = ( controle_voo, 14 )
+murasaki.modo_de_controle = ( controle_lateral_pula, 10 )
+drexa.modo_de_controle = ( controle_lateral_pula, 10 )
+arquimago.modo_de_controle = ( controle_voo, 8 )
 cyber.modo_de_controle = ( controle_lateral_pula, 8 )
-maguinho.modo_de_controle = ( controle_voo, 14 )
+maguinho.modo_de_controle = ( controle_voo, 8 )
 
     # salto base
     # mulplicador de velocidade

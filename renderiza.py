@@ -55,8 +55,8 @@ def renderiza_tiles( vetor, superficie=pre_tela, rel_coord=(0,0) ):
         pygame.draw.rect( superficie, color.colorDarkGrey, j, width = 0 )
 
 def renderiza_tela():
-    pre_tela.blit( mini_tela, (size[0]/2, 0) )
+    pre_tela.blit( mini_tela, (pre_size[0]/2, 0) )
     screen.blit( pygame.transform.scale(pre_tela, size), pygame.Rect(0, 0, 0, 0))
     pygame.display.flip()
     mini_tela.fill(color.colorOrange)
-    pre_tela.fill((0, 255, 0))
+    pre_tela.fill(color.colorIndigo)

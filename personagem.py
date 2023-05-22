@@ -70,6 +70,8 @@ class Personagem():
 	def run(self):
 
 		if self.fisica.velocidade_lateral == 0:
+			if self.current_animation != self.animations.idle:
+				self.animations.idle.turnOn()
 			self.current_animation = self.animations.idle
 		else:
 			if len( self.animations.breaking.content ) and ( self.fisica.velocidade_lateral > 0 ) == self.left:
@@ -134,27 +136,15 @@ class Animation():
 		self.inicioDoLoop = 0
 		self.repetindo = True
 		self.rodando = False
-		self.index = 0
+		self.index = 0            
 
 	def configura(self, inicioDoLoop):
 		self.inicioDoLoop = inicioDoLoop
 
-	def set(self, path = None, start = 0, end = 999 ):
+	def set(self, path, start = 0, end = 999 ):
 
-		if path:
-
-			self.path = path
-			self.content = graphics.import_animation( path, start, end )
-		else:
-
-			try:
-
-				self.content = graphics.import_animation( self.path )
-			except AttributeError:
-				print('\nWARNING: Animation() class in Animation.set() function')
-				print('    recebendo valor nulo para o caminho de diretório!')
-				print('    resulta em tentativa falha de auto-incrementação\n')
-				print('    erro iminente!\n')
+		self.path = path
+		self.content = graphics.import_animation( path, start, end )
 
 	def turnOn(self):
 
@@ -264,30 +254,32 @@ monstrinho.movimentacao_cossenoidal.set_frequencia( 0.2 )
 monstrinho.movimentacao_cossenoidal.set_amplitude( 100 )
 
 monstrinho.current_animation = monstrinho.animations.idle
-monstrinho.current_animation.set( 'characters\pequeno mago\idle' )
+monstrinho.current_animation.set( 'characters\\boca\idle-fly' ) #pequeno mago\idle' )
 monstrinho.current_animation.configura(0)
 monstrinho.current_animation.turnOn()
 
-monstrinho.animations.walking.set( 'characters\pequeno mago\idle' )
+monstrinho.animations.walking.set( 'characters\\boca\walk-fly' ) #pequeno mago\idle' )
 monstrinho.animations.walking.configura(0)
 monstrinho.animations.walking.turnOn()
 
 monstrinho.rect = monstrinho.animations.idle.content[0].get_rect()
 monstrinho.rect.left = 1000
 monstrinho.rect.bottom = 100
+monstrinho.fisica.retangulo_do_corpo.width = 29
 
 maguinho = Personagem()
 
 maguinho.current_animation = maguinho.animations.idle
-maguinho.current_animation.set( 'characters\pequeno mago\idle' )
+maguinho.current_animation.set( 'characters\\boca\idle-fly' ) #pequeno mago\idle' )
 maguinho.current_animation.configura(0)
 maguinho.current_animation.turnOn()
 
-maguinho.animations.walking.set( 'characters\pequeno mago\idle' )
+maguinho.animations.walking.set( 'characters\\boca\walk-fly' ) #pequeno mago\idle' )
 maguinho.animations.walking.configura(0)
 maguinho.animations.walking.turnOn()
 
 maguinho.fisica.afetado_por_gravidade = False
+maguinho.fisica.retangulo_do_corpo.width = 29
 maguinho.rect = maguinho.animations.idle.content[0].get_rect()
 maguinho.rect.left = 400
 maguinho.rect.bottom = 100
