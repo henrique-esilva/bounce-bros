@@ -30,13 +30,15 @@ screen = pygame.display.set_mode(size, flags)
 
 
 def impressao_de_imagem( superficie, imagem, rect, rel_coord=(0,0) ):
+    """carimba 'imagem' em 'superficie'.
+    'rect' possui o tamanho da 'imagem' e coordenada.
+    'rel_coord' e' a coordenada relativa da personagem referencia"""
     j=Rect(rect)
     j.move_ip(rel_coord)
     superficie.blit( imagem, j )
 
 
 def renderiza_personagem( a, superficie=pre_tela, rel_coord=(0, 0) ):
-    #retangulo_de_posicao = a.rect
     imagem = pygame.transform.flip( a.current_animation.retorna_quadro(), a.left, 0 )
     imagem = pygame.transform.rotate( imagem, a.fisica.angulo_de_rotacao )
     rect = imagem.get_rect()

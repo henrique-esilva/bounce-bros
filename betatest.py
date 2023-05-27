@@ -105,10 +105,8 @@ def main():
     player = objetos.personagens[ indice_player ]
     player2 = objetos.personagens[ indice_player-1 ]
 
-    #move_todos_pela_tela()
-    rel_x = pre_tela_rect.centerx - player.rect.centerx -pre_size[0]/4
-    rel_y = pre_tela_rect.centery - player.rect.centery
-    rel_drexa = (get_rel_char(player2)[0]-pre_size[0]/4, get_rel_char(player2)[1])
+    rel_p1 = (get_rel_char(player )[0]-pre_size[0]/4, get_rel_char(player )[1])
+    rel_p2 = (get_rel_char(player2)[0]-pre_size[0]/4, get_rel_char(player2)[1])
 
     #controle_lateral_pula( player2, 1, player2.modo_de_controle[1] )
     #controle_lateral_pula( player, 0, player.modo_de_controle[1] )
@@ -129,25 +127,26 @@ def main():
             objetos.particulas.remove(i)
 
         i.current_animation.run()
-        renderiza_particula( i, pre_tela, (rel_x, rel_y) )
-        renderiza_particula( i, mini_tela, rel_drexa )
+        renderiza_particula( i, pre_tela, rel_p1 )
+        renderiza_particula( i, mini_tela, rel_p2 )
 
     for i in objetos.fantasminhas:
         i.run()
         movimentacao_automatica_cossenoidal( i )
+        movimentacao_automatica_senoidal( i )
         i.current_animation.run( i.fisica.velocidade_lateral )
-        renderiza_personagem( i, pre_tela, (rel_x, rel_y) )
-        renderiza_personagem( i, mini_tela, rel_drexa )
+        renderiza_personagem( i, pre_tela, rel_p1 )
+        renderiza_personagem( i, mini_tela, rel_p2 )
 
     for i in objetos.personagens:
         i.current_animation.run( i.fisica.velocidade_lateral )
         i.run()
-        renderiza_personagem( i, pre_tela, (rel_x, rel_y) )
-        renderiza_personagem( i, mini_tela, rel_drexa )
+        renderiza_personagem( i, pre_tela, rel_p1 )
+        renderiza_personagem( i, mini_tela, rel_p2 )
 
     remove_personagem()
 
-    renderiza_tiles( objetos.plataformas, pre_tela, (rel_x, rel_y) )
-    renderiza_tiles( objetos.plataformas, mini_tela, rel_drexa )
+    renderiza_tiles( objetos.plataformas, pre_tela, rel_p1 )
+    renderiza_tiles( objetos.plataformas, mini_tela, rel_p2 )
     desenha_coracoes()
     renderiza_tela()

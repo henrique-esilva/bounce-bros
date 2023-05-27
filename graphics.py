@@ -20,7 +20,7 @@ def import_animation(arg, start = 0, end = 999):     # O "arg"(parametro) deve s
 
     if len(a) == 0:
 
-        print('\nWARNING: \'import_animation()\' retornando vetor de 0 (zero) valores')
+        print('\nWARNING: \'import_animation()\' retornando vetor de comprimento nulo para:')
         print('\n    caminho de busca: \'' + arg + '\'')
         print('\n    arquivos não encontrados')
     return a

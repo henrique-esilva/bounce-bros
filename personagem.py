@@ -250,8 +250,13 @@ arquimago.fisica.afetado_por_gravidade = False
 
 monstrinho = Personagem()
 monstrinho.movimentacao_cossenoidal = Movimentacao_cossenoidal(600)
-monstrinho.movimentacao_cossenoidal.set_frequencia( 0.2 )
+monstrinho.movimentacao_cossenoidal.set_frequencia( 0.5 )
 monstrinho.movimentacao_cossenoidal.set_amplitude( 100 )
+
+monstrinho.movimentacao_senoidal = Movimentacao_cossenoidal(600)
+monstrinho.movimentacao_senoidal.set_frequencia( 0.5 )
+monstrinho.movimentacao_senoidal.set_amplitude( 100 )
+monstrinho.movimentacao_senoidal.espaco_angular = 0.5
 
 monstrinho.current_animation = monstrinho.animations.idle
 monstrinho.current_animation.set( 'characters\\boca\idle-fly' ) #pequeno mago\idle' )
@@ -263,9 +268,9 @@ monstrinho.animations.walking.configura(0)
 monstrinho.animations.walking.turnOn()
 
 monstrinho.rect = monstrinho.animations.idle.content[0].get_rect()
+monstrinho.rect.top = 128*3
 monstrinho.rect.left = 1000
-monstrinho.rect.bottom = 100
-monstrinho.fisica.retangulo_do_corpo.width = 29
+monstrinho.fisica.retangulo_do_corpo.width = 30
 
 maguinho = Personagem()
 

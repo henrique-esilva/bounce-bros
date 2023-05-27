@@ -139,10 +139,10 @@ def colisao_com_plataformas( personagem, vetor_plataformas = objetos.plataformas
                 # usaremos a lateral direita da plataforma e a lateral esquerda do personagem.
 
                     # usar o sinal do copysign
-                lateral_direita_da_plataforma = plataforma.centerx + plataforma.width /2
+                #lateral_direita_da_plataforma = plataforma.centerx + plataforma.width /2
 
                     # usar o sinal inverso do copysign
-                lateral_esquerda_da_personagem = personagem.rect.centerx - personagem.rect.width /2
+                #lateral_esquerda_da_personagem = personagem.rect.centerx - personagem.rect.width /2
 
                 # se queremos mover a personagem para a direita, usaremos a subtração da lateral direita da
                 # plataforma pela lateral esquerda da personagem.
@@ -274,7 +274,8 @@ def controle_lateral_pula ( kk , key_set, limite = 30 ):
     if tecla[key_set[2]]:
         if is_landed( kk ):
             objetos.particulas.append( efeitos_visuais.ObjetoEfemero( [ kk.rect.centerx, kk.rect.bottom ] ) )
-            kk.fisica.velocidade_de_queda = kk.multiplicadores_de_salto[0] - math.copysign( kk.fisica.velocidade_lateral, 1 ) * kk.multiplicadores_de_salto[1] # 30 is necessary to jump a plataform
+                # 30 is needed to jump a plataform
+            kk.fisica.velocidade_de_queda = kk.multiplicadores_de_salto[0] - math.copysign( kk.fisica.velocidade_lateral, 1 ) * kk.multiplicadores_de_salto[1]
             #if kk.fisica.velocidade_lateral >= kk.multiplicadores_de_velocidade[0]:
             kk.fisica.velocidade_lateral = kk.fisica.velocidade_lateral * kk.multiplicadores_de_velocidade[1][math.copysign(kk.fisica.velocidade_lateral,1) == kk.multiplicadores_de_velocidade[0]]
 
@@ -298,25 +299,29 @@ def controle_lateral_pula ( kk , key_set, limite = 30 ):
 
         # olhamos se a velocidade é para a direita ou esquerda...
 
-        if kk.fisica.velocidade_lateral > 0:
-            # então diminuimos...
-            kk.fisica.velocidade_lateral -= 2
-        if kk.fisica.velocidade_lateral < 0:
-            # ...ou aumentamos     =^-^=
-            kk.fisica.velocidade_lateral += 2
-        if kk.fisica.velocidade_lateral == 1:
-            kk.fisica.velocidade_lateral = 0
+        #abs=math.copysign(kk.fisica.velocidade_lateral, 1)
+        kk.fisica.velocidade_lateral -= math.copysign(int(kk.fisica.velocidade_lateral!=0), kk.fisica.velocidade_lateral)
+        kk.fisica.velocidade_lateral -= math.copysign(int(kk.fisica.velocidade_lateral!=0), kk.fisica.velocidade_lateral)
+
+        #if kk.fisica.velocidade_lateral > 0:
+        #    # então diminuimos...
+        #    kk.fisica.velocidade_lateral -= 2
+        #if kk.fisica.velocidade_lateral < 0:
+        #    # ...ou aumentamos     =^-^=
+        #    kk.fisica.velocidade_lateral += 2
+        #if kk.fisica.velocidade_lateral == 1:
+        #    kk.fisica.velocidade_lateral = 0
 
 
-    if kk.fisica.velocidade_lateral > 0: kk.left = False
-    elif kk.fisica.velocidade_lateral < 0: kk.left = True
+    kk.left = ( 
+        kk.fisica.velocidade_lateral < 0 
+        ) or kk.left * (
+        kk.fisica.velocidade_lateral == 0 )
+    #if kk.fisica.velocidade_lateral > 0: kk.left = False
+    #elif kk.fisica.velocidade_lateral < 0: kk.left = True
 
     # e movemos
     kk.rect.centerx += kk.fisica.velocidade_lateral
-
-    # por ultimo, depois de mover o personagem, 
-    # fazemos um reajuste de posição que impede
-    # que alguém saia da tela
 
     kk.ajusta_retangulos()
 
@@ -370,17 +375,6 @@ def controle_voo( personagem, key_set, limite = 30 ):
     personagem.rect.centerx += personagem.fisica.velocidade_lateral
 
     personagem.ajusta_retangulos()
-
-
-def mouse_control(arg):
-    mouse = pygame.mouse.get_pressed()
-    if mouse[0] or mouse[2]:
-        pos = list(pygame.mouse.get_pos())
-
-        pos[0] = pos[0]/screen_size.scale
-        pos[1] = pos[1]/screen_size.scale
-
-        arg.distiny = pos.copy()
 
 
 def controla_setas(kk):
@@ -443,9 +437,9 @@ def movimentacao_automatica_cossenoidal( coisa ):
 
 def movimentacao_automatica_senoidal( coisa ):
     try:
-        mov = coisa.movimentacao_cossenoidal
+        mov = coisa.movimentacao_senoidal
     except AttributeError:
-        print( "ATENÇÃO: uma classe tentou usar a função de movimentação cossenoidal automática sem possuir a classe de atibutos \"Movimentacao_cossenoidal\"" )
+        print( "ATENÇÃO: uma classe tentou usar a função de movimentação cossenoidal automática sem possuir a classe de atibutos \"Movimentacao_senoidal\"" )
         print( "O programa pode se desligar ou apresentar comportamento imprevisível por conta disso\n" )
 
     posicao_relativa_anterior = int(mov.amplitude_maxima * math.cos( mov.espaco_angular * math.pi))
