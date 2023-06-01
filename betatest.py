@@ -134,12 +134,12 @@ def main():
         i.run()
         movimentacao_automatica_cossenoidal( i )
         movimentacao_automatica_senoidal( i )
-        i.current_animation.run( i.fisica.velocidade_lateral )
+        i.current_animation.run()# i.fisica.velocidade_lateral )
         renderiza_personagem( i, pre_tela, rel_p1 )
         renderiza_personagem( i, mini_tela, rel_p2 )
 
     for i in objetos.personagens:
-        i.current_animation.run( i.fisica.velocidade_lateral )
+        i.current_animation.run()# i.fisica.velocidade_lateral )
         i.run()
         renderiza_personagem( i, pre_tela, rel_p1 )
         renderiza_personagem( i, mini_tela, rel_p2 )
