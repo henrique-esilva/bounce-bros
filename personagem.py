@@ -215,6 +215,9 @@ murasaki.animations.breaking.set( 'characters//murasaki//andando', 70 )
 murasaki.animations.breaking.configura(0)
 murasaki.animations.breaking.turnOn()
 
+# I will make a `slash` animation for murasaki. Will have also a function to attack, that switches
+# the current animation for `slash` and places a object in scene that deals damage to enemies.
+
 murasaki.rect = murasaki.animations.walking.content[0].get_rect()
 murasaki.rect.left = 0
 murasaki.funcoes = []
@@ -250,11 +253,11 @@ arquimago.fisica.afetado_por_gravidade = False
 
 monstrinho = Personagem()
 monstrinho.movimentacao_cossenoidal = Movimentacao_cossenoidal(600)
-monstrinho.movimentacao_cossenoidal.set_frequencia( 0.5 )
+monstrinho.movimentacao_cossenoidal.set_frequencia( 0.2 )
 monstrinho.movimentacao_cossenoidal.set_amplitude( 100 )
 
 monstrinho.movimentacao_senoidal = Movimentacao_cossenoidal(600)
-monstrinho.movimentacao_senoidal.set_frequencia( 0.5 )
+monstrinho.movimentacao_senoidal.set_frequencia( 0.2 )
 monstrinho.movimentacao_senoidal.set_amplitude( 100 )
 monstrinho.movimentacao_senoidal.espaco_angular = 0.5
 
