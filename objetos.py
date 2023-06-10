@@ -1,9 +1,9 @@
-from personagem import personagens as lista_personagens, monstrinho
+from personagem import personagens as lista_personagens, monstrinho, boca
 import tileset
 import efeitos_visuais
 
 personagens = lista_personagens
-fantasminhas = [ monstrinho ]
+fantasminhas = [ monstrinho, boca ]
 particulas = []
 plataformas = tileset.plataformas
 

@@ -147,7 +147,7 @@ def colisao_com_plataformas( personagem, vetor_plataformas = objetos.plataformas
                 # se queremos mover a personagem para a direita, usaremos a subtração da lateral direita da
                 # plataforma pela lateral esquerda da personagem.
 
-                sinal = math.copysign( 1 , personagem.fisica.velocidade_lateral )
+                sinal = math.copysign( 1 , plataforma.centerx-personagem.rect.centerx ) #personagem.fisica.velocidade_lateral )
 
                 personagem.rect.centerx = sinal + ( plataforma.centerx - sinal * plataforma.width/2 ) - ( 
                     sinal * personagem.fisica.retangulo_do_corpo.width/2 )

@@ -66,9 +66,7 @@ class Personagem():
 		self.fisica.retangulo_dos_pes.bottom = self.rect.bottom
 		self.fisica.retangulo_dos_pes.centerx = self.rect.centerx
 
-
-	def run(self):
-
+	def default_animation_adjust(self):
 		if self.fisica.velocidade_lateral == 0:
 			if self.current_animation != self.animations.idle:
 				self.animations.idle.turnOn()
@@ -81,6 +79,21 @@ class Personagem():
 					self.animations.walking.turnOn()
 				self.current_animation = self.animations.walking
 
+	def run(self):
+
+		#if self.fisica.velocidade_lateral == 0:
+		#	if self.current_animation != self.animations.idle:
+		#		self.animations.idle.turnOn()
+		#	self.current_animation = self.animations.idle
+		#else:
+		#	if len( self.animations.breaking.content ) and ( self.fisica.velocidade_lateral > 0 ) == self.left:
+		#		self.current_animation = self.animations.breaking
+		#	elif len(self.animations.walking.content) > 0:
+		#		if self.current_animation != self.animations.walking:
+		#			self.animations.walking.turnOn()
+		#		self.current_animation = self.animations.walking
+
+		self.default_animation_adjust()
 
 		# ajustando o retângulo de colisão global
 		self.fisica.retangulo_do_corpo.bottom = self.rect.bottom
@@ -136,7 +149,8 @@ class Animation():
 		self.inicioDoLoop = 0
 		self.repetindo = True
 		self.rodando = False
-		self.index = 0            
+		self.index = 0
+
 
 	def configura(self, inicioDoLoop):
 		self.inicioDoLoop = inicioDoLoop
@@ -172,17 +186,14 @@ class Animation():
 
 			self.index += 0.5 * velocidade
 			if math.floor( self.index ) >= len(self.content):
-				try:
-					if self.repetindo:
-						self.index = self.inicioDoLoop
-					else:
-						self.turnOff()
-						self.index = 0
+				if self.repetindo:
+					self.index = self.inicioDoLoop
+				else:
+					self.index=0
+					self.turnOff()
 
-				except AttributeError:
-					print('WARNING: erro de atribuição de instância em \'Animation.run()\'')
-					print('    configure a classe de animação!')
-					sys.exit()
+	def goto( self, frame ):
+		self.index = frame
 
 	def retorna_quadro(self):
 
@@ -196,7 +207,7 @@ class Animation():
 			print( '\nWARNING: \'index\' invalido para -> \'Animation\' em \'retorna_valor()\'' )
 			print( 'index =', self.index )
 			print( 'efetivo =', math.floor( self.index ) )
-			print( 'len(self.content) = ' + str(len(self.content)) + '\n')
+			print( 'len(self.content) = ' + str(len(self.content)) + '\n' )
 			sys.exit()
 
 
@@ -207,7 +218,7 @@ murasaki.animations.idle.configura(0)
 murasaki.animations.idle.turnOn()
 
 murasaki.current_animation = murasaki.animations.walking
-murasaki.current_animation.set( 'characters//murasaki//andando', 46 )
+murasaki.current_animation.set( 'characters//murasaki//andando-lento', 9 ) #46
 murasaki.current_animation.configura(0)
 murasaki.current_animation.turnOn()
 
@@ -271,9 +282,23 @@ monstrinho.animations.walking.configura(0)
 monstrinho.animations.walking.turnOn()
 
 monstrinho.rect = monstrinho.animations.idle.content[0].get_rect()
-monstrinho.rect.top = 128*3
+monstrinho.rect.top = 128*1.5
 monstrinho.rect.left = 1000
 monstrinho.fisica.retangulo_do_corpo.width = 30
+
+
+boca=Personagem()
+boca.animations.idle.set( 'characters\\boca\\flutuando' )
+#boca.animations.idle.configura(22)
+boca.animations.idle.turnOn()
+#boca.animations.ascend=Animation()
+#boca.animations.ascend.set( 'characters\\boca\\ascendendo' )
+#boca.animations.ascend.turnOn()
+
+#boca.current_animation=boca.animations.ascend
+boca.rect.left= -200
+boca.rect.top=100
+
 
 maguinho = Personagem()
 

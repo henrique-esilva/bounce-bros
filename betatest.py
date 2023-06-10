@@ -1,8 +1,11 @@
-from personagem import murasaki, drexa, arquimago, cyber, maguinho, Movimentacao_cossenoidal
+from personagem import murasaki, drexa, arquimago, cyber, maguinho
 from renderiza import *
 from moving_functions import *
 
 import objetos
+
+objetos.monstrinho.funcoes.append( movimentacao_automatica_cossenoidal )
+objetos.monstrinho.funcoes.append( movimentacao_automatica_senoidal )
 
 imagem_coracao = pygame.image.load( "efeitos\\coracao.png" )
 
@@ -108,9 +111,6 @@ def main():
     rel_p1 = (get_rel_char(player )[0]-pre_size[0]/4, get_rel_char(player )[1])
     rel_p2 = (get_rel_char(player2)[0]-pre_size[0]/4, get_rel_char(player2)[1])
 
-    #controle_lateral_pula( player2, 1, player2.modo_de_controle[1] )
-    #controle_lateral_pula( player, 0, player.modo_de_controle[1] )
-
     for character in objetos.personagens:
         if character == player:
             character.modo_de_controle[0]( character, 0, character.modo_de_controle[1] )
@@ -132,8 +132,6 @@ def main():
 
     for i in objetos.fantasminhas:
         i.run()
-        movimentacao_automatica_cossenoidal( i )
-        movimentacao_automatica_senoidal( i )
         i.current_animation.run()# i.fisica.velocidade_lateral )
         renderiza_personagem( i, pre_tela, rel_p1 )
         renderiza_personagem( i, mini_tela, rel_p2 )
