@@ -122,7 +122,7 @@ class Fisica():
 		self.velocidade_de_rotacao = 0
 		self.angulo_de_rotacao = 0
 
-		self.retangulo_do_corpo = pygame.Rect( 0, 0, 36, 72 )
+		self.retangulo_do_corpo = pygame.Rect( 0, 0, 36, 77 )
 
 		# O retangulo da cabeça deve ficar 57px acima da borda inferior do retangulo principal
 		self.retangulo_da_cabeca = pygame.Rect( 0, 0, 36, 17 )
@@ -289,13 +289,8 @@ monstrinho.fisica.retangulo_do_corpo.width = 30
 
 boca=Personagem()
 boca.animations.idle.set( 'characters\\boca\\flutuando' )
-#boca.animations.idle.configura(22)
 boca.animations.idle.turnOn()
-#boca.animations.ascend=Animation()
-#boca.animations.ascend.set( 'characters\\boca\\ascendendo' )
-#boca.animations.ascend.turnOn()
 
-#boca.current_animation=boca.animations.ascend
 boca.rect.left= -200
 boca.rect.top=100
 
@@ -303,16 +298,16 @@ boca.rect.top=100
 maguinho = Personagem()
 
 maguinho.current_animation = maguinho.animations.idle
-maguinho.current_animation.set( 'characters\\boca\idle-fly' ) #pequeno mago\idle' )
+maguinho.current_animation.set( 'characters\\boca\\flutuando' ) #pequeno mago\idle' )
 maguinho.current_animation.configura(0)
 maguinho.current_animation.turnOn()
 
-maguinho.animations.walking.set( 'characters\\boca\walk-fly' ) #pequeno mago\idle' )
-maguinho.animations.walking.configura(0)
-maguinho.animations.walking.turnOn()
+#maguinho.animations.walking.set( 'characters\\boca\walk-fly' ) #pequeno mago\idle' )
+#maguinho.animations.walking.configura(0)
+#maguinho.animations.walking.turnOn()
 
 maguinho.fisica.afetado_por_gravidade = False
-maguinho.fisica.retangulo_do_corpo.width = 29
+#maguinho.fisica.retangulo_do_corpo.width = 29
 maguinho.rect = maguinho.animations.idle.content[0].get_rect()
 maguinho.rect.left = 400
 maguinho.rect.bottom = 100

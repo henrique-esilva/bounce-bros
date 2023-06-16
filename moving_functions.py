@@ -297,28 +297,16 @@ def controle_lateral_pula ( kk , key_set, limite = 30 ):
     # verificando se nenhuma das teclas esta sendo pressionada...
     if is_landed( kk ) and ( ( tecla[key_set[0]] and tecla[key_set[1]] ) or (not ( tecla[key_set[0]] or tecla[key_set[1]] )) or ( not tecla[key_set[0]] and kk.fisica.velocidade_lateral < 0) or ( not tecla[key_set[1]] and kk.fisica.velocidade_lateral > 0)):
 
-        # olhamos se a velocidade é para a direita ou esquerda...
+        # reduzimos a velocidade de acordo com a direcao de movimento da personagem...
 
-        #abs=math.copysign(kk.fisica.velocidade_lateral, 1)
         kk.fisica.velocidade_lateral -= math.copysign(int(kk.fisica.velocidade_lateral!=0), kk.fisica.velocidade_lateral)
         kk.fisica.velocidade_lateral -= math.copysign(int(kk.fisica.velocidade_lateral!=0), kk.fisica.velocidade_lateral)
-
-        #if kk.fisica.velocidade_lateral > 0:
-        #    # então diminuimos...
-        #    kk.fisica.velocidade_lateral -= 2
-        #if kk.fisica.velocidade_lateral < 0:
-        #    # ...ou aumentamos     =^-^=
-        #    kk.fisica.velocidade_lateral += 2
-        #if kk.fisica.velocidade_lateral == 1:
-        #    kk.fisica.velocidade_lateral = 0
 
 
     kk.left = ( 
         kk.fisica.velocidade_lateral < 0 
         ) or kk.left * (
         kk.fisica.velocidade_lateral == 0 )
-    #if kk.fisica.velocidade_lateral > 0: kk.left = False
-    #elif kk.fisica.velocidade_lateral < 0: kk.left = True
 
     # e movemos
     kk.rect.centerx += kk.fisica.velocidade_lateral
