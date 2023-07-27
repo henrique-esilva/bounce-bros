@@ -17,8 +17,7 @@ class ObjetoEfemero ():
 
         self.current_animation = Animation()
         self.current_animation.content = animacoes[path]
-        self.current_animation.configura(0)
-        self.current_animation.configura_repeteco( False )
+        self.current_animation.configura( False )
         self.current_animation.turnOn()
 
 
@@ -31,8 +30,7 @@ class BandeiraDerrota ():
     def __init__( self, posicao ):
         self.current_animation = Animation()
         self.current_animation.content = animacoes['efeitos/bandeira']
-        self.current_animation.configura(8)
-        self.current_animation.configura_repeteco( True )
+        self.current_animation.configura( 8 )
         self.current_animation.turnOn()
 
 

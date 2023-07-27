@@ -42,7 +42,7 @@ class Personagem():
 
 
 		self.animations = AnimationClass()
-		self.current_animation = None
+		self.current_animation = self.animations.idle
 
 
 		self.center = [0, 0]
@@ -140,20 +140,32 @@ class AnimationClass():
 		self.breaking = Animation()
 
 
+class LiteAnimation():
+	def __init__(self):
+		self.sprite = None
+		self.repeteco = False
+		self.rodando = False
+		self.index = 0
+
+	def configura(self, inicioDoLoop):
+		self.inicioDoLoop = inicioDoLoop
+
 
 class Animation():
 
 	def __init__(self):
 
 		self.content = []
-		self.inicioDoLoop = 0
-		self.repetindo = True
+		self.repeteco = 0
 		self.rodando = False
 		self.index = 0
 
 
 	def configura(self, inicioDoLoop):
-		self.inicioDoLoop = inicioDoLoop
+
+		"""put an integer will set a index sprite for second time play
+		put False will set the animation playing just once"""
+		self.repeteco = inicioDoLoop
 
 	def set(self, path, start = 0, end = 999 ):
 
@@ -169,8 +181,8 @@ class Animation():
 
 		self.rodando = False
 
-	def configura_repeteco(self, arg):
-		
+	def configura_repeteco(self, arg): #remover funcao configura_repeteco()
+		"""deprecated"""
 		self.repetindo = arg
 
 	def run(self, velocidade = 12):
@@ -186,13 +198,13 @@ class Animation():
 
 			self.index += 0.5 * velocidade
 			if math.floor( self.index ) >= len(self.content):
-				if self.repetindo:
-					self.index = self.inicioDoLoop
+				if type(self.repeteco)==int:
+					self.index = self.repeteco
 				else:
 					self.index=0
 					self.turnOff()
 
-	def goto( self, frame ):
+	def goto( self, frame:int ):
 		self.index = frame
 
 	def retorna_quadro(self):
@@ -217,10 +229,16 @@ murasaki.animations.idle.set( 'characters//murasaki//idle' )
 murasaki.animations.idle.configura(0)
 murasaki.animations.idle.turnOn()
 
-murasaki.current_animation = murasaki.animations.walking
-murasaki.current_animation.set( 'characters//murasaki//andando-lento', 9 ) #46
-murasaki.current_animation.configura(0)
-murasaki.current_animation.turnOn()
+murasaki.current_animation = murasaki.animations.idle
+
+murasaki.animations.walking.set( 'characters//murasaki//andando-lento', 9 )
+murasaki.animations.walking.configura(0)
+murasaki.animations.walking.turnOn()
+
+murasaki.animations.fast_walking = Animation()
+murasaki.animations.fast_walking.set( 'characters//murasaki//andando', 23 )
+murasaki.animations.fast_walking.configura(0)
+murasaki.animations.fast_walking.turnOn()
 
 murasaki.animations.breaking.set( 'characters//murasaki//andando', 70 )
 murasaki.animations.breaking.configura(0)
@@ -231,8 +249,11 @@ murasaki.animations.breaking.turnOn()
 
 murasaki.rect = murasaki.animations.walking.content[0].get_rect()
 murasaki.rect.left = 0
-murasaki.funcoes = []
 
+def murasaki_animation_extra_adjust( blabla:any ):
+	if math.copysign( murasaki.fisica.velocidade_lateral, 1 ) > 9:
+		murasaki.current_animation = murasaki.animations.fast_walking
+murasaki.funcoes.insert( 1, murasaki_animation_extra_adjust )
 
 drexa = Personagem()
 
@@ -248,7 +269,20 @@ drexa.current_animation.configura(0)
 drexa.current_animation.turnOn()
 
 drexa.rect = drexa.current_animation.content[0].get_rect()
-drexa.rect.left = 250
+drexa.rect.left = 300
+
+
+logan = Personagem()
+
+logan.animations.idle.set( 'characters//drexa//logan//attack' )
+logan.animations.idle.configura(0)
+logan.animations.idle.turnOn()
+logan.animations.walking.set( 'characters//drexa//logan//walking' )
+logan.animations.walking.configura(0)
+logan.animations.walking.turnOn()
+
+logan.rect=logan.current_animation.content[0].get_rect()
+logan.rect.left=200
 
 
 arquimago = Personagem()
@@ -307,7 +341,6 @@ maguinho.current_animation.turnOn()
 #maguinho.animations.walking.turnOn()
 
 maguinho.fisica.afetado_por_gravidade = False
-#maguinho.fisica.retangulo_do_corpo.width = 29
 maguinho.rect = maguinho.animations.idle.content[0].get_rect()
 maguinho.rect.left = 400
 maguinho.rect.bottom = 100
@@ -323,6 +356,6 @@ cyber.current_animation.set( 'characters\\cyber\\walking', 1 )
 cyber.current_animation.configura(1)
 cyber.rect = cyber.animations.idle.content[0].get_rect()
 cyber.current_animation.turnOn()
-cyber.rect.left = 200
+cyber.rect.left = 250
 
-personagens = [ murasaki, drexa, arquimago, cyber, maguinho ]
+personagens = [ murasaki, drexa, logan, cyber, arquimago, maguinho ]

@@ -92,14 +92,14 @@ def colisao_com_plataformas( personagem, vetor_plataformas = objetos.plataformas
             plataforma.left+1 < personagem.fisica.retangulo_do_corpo.right -personagem.fisica.velocidade_lateral < plataforma.right-1
         )
 
-        dist_relat = (
-            + math.copysign( 1, personagem.fisica.velocidade_lateral )
-            * ( personagem.fisica.retangulo_do_corpo.centerx
-            + math.copysign( personagem.fisica.retangulo_do_corpo.width/2, personagem.fisica.velocidade_lateral )
-            - personagem.fisica.velocidade_lateral )
-            - math.copysign( 1, personagem.fisica.velocidade_lateral )
-            * ( plataforma.centerx - math.copysign( plataforma.width /2, personagem.fisica.velocidade_lateral ) )
-            )
+        #dist_relat = (
+        #    + math.copysign( 1, personagem.fisica.velocidade_lateral )
+        #    * ( personagem.fisica.retangulo_do_corpo.centerx
+        #    + math.copysign( personagem.fisica.retangulo_do_corpo.width/2, personagem.fisica.velocidade_lateral )
+        #    - personagem.fisica.velocidade_lateral )
+        #    - math.copysign( 1, personagem.fisica.velocidade_lateral )
+        #    * ( plataforma.centerx - math.copysign( plataforma.width /2, personagem.fisica.velocidade_lateral ) )
+        #    )
 
         if personagem.fisica.retangulo_do_corpo.colliderect( plataforma ):
 
@@ -274,10 +274,10 @@ def controle_lateral_pula ( kk , key_set, limite = 30 ):
     if tecla[key_set[2]]:
         if is_landed( kk ):
             objetos.particulas.append( efeitos_visuais.ObjetoEfemero( [ kk.rect.centerx, kk.rect.bottom ] ) )
-                # 30 is needed to jump a plataform
+                # at least 30 is requiered to jump a plataform
             kk.fisica.velocidade_de_queda = kk.multiplicadores_de_salto[0] - math.copysign( kk.fisica.velocidade_lateral, 1 ) * kk.multiplicadores_de_salto[1]
             #if kk.fisica.velocidade_lateral >= kk.multiplicadores_de_velocidade[0]:
-            kk.fisica.velocidade_lateral = kk.fisica.velocidade_lateral * kk.multiplicadores_de_velocidade[1][math.copysign(kk.fisica.velocidade_lateral,1) == kk.multiplicadores_de_velocidade[0]]
+            kk.fisica.velocidade_lateral = kk.fisica.velocidade_lateral * kk.multiplicadores_de_velocidade[1][math.copysign(kk.fisica.velocidade_lateral,1) >= kk.multiplicadores_de_velocidade[0]]
 
     if tecla[key_set[0]]:
         if kk.fisica.velocidade_lateral > -limite_de_velocidade:
