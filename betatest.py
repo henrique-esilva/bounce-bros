@@ -17,7 +17,7 @@ cyber.funcoes +=     [gravidade, rebate, colisao_com_plataformas, efeito_de_giro
 maguinho.funcoes +=  [gravidade, colisao_com_plataformas]
 logan.funcoes +=     root_funcoes
 
-murasaki.modo_de_controle = ( controle_lateral_pula, 8 ) # 10 )
+murasaki.modo_de_controle = ( controle_lateral_pula, 10 )
 drexa.modo_de_controle = ( controle_lateral_pula, 10 )
 arquimago.modo_de_controle = ( controle_voo, 8 )
 cyber.modo_de_controle = ( controle_lateral_pula, 8 )

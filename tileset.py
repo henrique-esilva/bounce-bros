@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 
-tamanho_dos_tiles = (64, 64) #(96, 96)
+tamanho_dos_tiles = ( 96, 96 )#(64, 64) #(96, 96)
 
 tileset = [
     (-2, 5),
@@ -18,11 +18,20 @@ tileset = [
     ( 2, 6),
     ( 3, 6),
     ( 4, 6),
+
     ( 5, 3),
-    ( 6, 3)
+    ( 6, 3),
+    ( 7, 3),
+
+    ( 6, 4),
+    ( 7, 4),
+    ( 7, 5),
+
+    ( 5, 7),
+    ( 6, 7),
 ]
 
-for i in range(5, 20):
+for i in range(7, 20):
     tileset.append((i, 6))
 
 plataformas = [

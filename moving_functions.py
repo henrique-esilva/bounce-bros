@@ -92,15 +92,6 @@ def colisao_com_plataformas( personagem, vetor_plataformas = objetos.plataformas
             plataforma.left+1 < personagem.fisica.retangulo_do_corpo.right -personagem.fisica.velocidade_lateral < plataforma.right-1
         )
 
-        #dist_relat = (
-        #    + math.copysign( 1, personagem.fisica.velocidade_lateral )
-        #    * ( personagem.fisica.retangulo_do_corpo.centerx
-        #    + math.copysign( personagem.fisica.retangulo_do_corpo.width/2, personagem.fisica.velocidade_lateral )
-        #    - personagem.fisica.velocidade_lateral )
-        #    - math.copysign( 1, personagem.fisica.velocidade_lateral )
-        #    * ( plataforma.centerx - math.copysign( plataforma.width /2, personagem.fisica.velocidade_lateral ) )
-        #    )
-
         if personagem.fisica.retangulo_do_corpo.colliderect( plataforma ):
 
             if (
@@ -177,6 +168,7 @@ def rebate( kk:__build_class__ ):
                         #media = int((velocidade_do_kk - i.fisica.velocidade_de_queda)/2)
                         #kk.fisica.velocidade_de_queda = -media-12
                         #i.fisica.velocidade_de_queda = media+12
+
                     kk.fisica.velocidade_de_queda = -25 + i.fisica.velocidade_de_queda - math.copysign( kk.fisica.velocidade_lateral, 1 ) * 1.5
 
                         #inverte a velocidade de queda para dar o efeito de impulso
@@ -209,7 +201,7 @@ def is_landed( coisa ):
 def efeito_de_giro( kk ):
     if is_landed( kk ):
         kk.fisica.angulo_de_rotacao = 0
-        kk.fisica.velocidade_de_rotacao = -kk.fisica.velocidade_lateral
+        #kk.fisica.velocidade_de_rotacao = -kk.fisica.velocidade_lateral
     else:
         kk.fisica.velocidade_de_rotacao = -kk.fisica.velocidade_lateral
         kk.fisica.angulo_de_rotacao += kk.fisica.velocidade_de_rotacao
@@ -235,15 +227,14 @@ def desaceleracao_aerea(kk):
         if math.copysign(kk.fisica.velocidade_lateral, 1) <= 1:
             kk.fisica.velocidade_lateral -= math.copysign( 1, kk.fisica.velocidade_lateral )
 
-        elif math.copysign(kk.fisica.velocidade_lateral, 1) > 1:
+        else: #elif math.copysign(kk.fisica.velocidade_lateral, 1) > 1:
             kk.fisica.velocidade_lateral -= math.copysign( 2, kk.fisica.velocidade_lateral )
 
     if kk.fisica.velocidade_de_queda != 0:
         if math.copysign(kk.fisica.velocidade_de_queda, 1) <= 1:
             kk.fisica.velocidade_de_queda = 0
-            #= math.copysign( 1, kk.fisica.velocidade_de_queda )
 
-        elif math.copysign(kk.fisica.velocidade_de_queda, 1) > 1:
+        else: #elif math.copysign(kk.fisica.velocidade_de_queda, 1) > 1:
             kk.fisica.velocidade_de_queda -= math.copysign( 2, kk.fisica.velocidade_de_queda )
 
     kk.rect.centerx += kk.fisica.velocidade_lateral
@@ -316,14 +307,36 @@ def controle_lateral_pula ( kk , key_set, limite = 30 ):
 
 
 def controle_voo( personagem, key_set, limite = 30 ):
-    key_set = (
-        (K_a, K_d, K_w, K_s),
-        (K_LEFT, K_RIGHT, K_UP, K_DOWN)
-        )[key_set]
+    #key_set = (
+    #    (K_a, K_d, K_w, K_s),
+    #    (K_LEFT, K_RIGHT, K_UP, K_DOWN)
+    #    )[key_set]
     
     limite_de_velocidade = limite
     tecla = pygame.key.get_pressed()
 
+    # esquerda/direita
+    # cima/baixo
+
+    key_set = (
+        ( (K_a, K_d), (K_w, K_s) ),
+        ( (K_LEFT, K_RIGHT), (K_UP, K_DOWN) ),
+    )[key_set]
+    relation = (-1, 1)
+
+    for i in range(len(key_set[0])):
+        if tecla[key_set[0][i]]:
+            personagem.fisica.velocidade_lateral += relation[i]
+        if not (tecla[key_set[0][0]] or tecla[key_set[0][1]]) and personagem.fisica.velocidade_lateral != 0:
+            personagem.fisica.velocidade_lateral -= math.copysign( 1, personagem.fisica.velocidade_lateral )
+
+    for i in range(len(key_set[1])):
+        if tecla[key_set[1][i]]:
+            personagem.fisica.velocidade_de_queda += relation[i]
+        if not (tecla[key_set[1][0]] or tecla[key_set[1][1]]) and personagem.fisica.velocidade_de_queda != 0:
+            personagem.fisica.velocidade_de_queda -= math.copysign( 1, personagem.fisica.velocidade_de_queda )
+
+    '''
     if tecla[key_set[0]]:
         personagem.fisica.velocidade_lateral -= 1
 
@@ -341,6 +354,7 @@ def controle_voo( personagem, key_set, limite = 30 ):
 
     if not (tecla[key_set[2]] or tecla[key_set[3]]) and personagem.fisica.velocidade_de_queda != 0:
         personagem.fisica.velocidade_de_queda -= math.copysign( 1, personagem.fisica.velocidade_de_queda )
+    '''
 
 
     # verificando se a velocidade estrapolou os limites...

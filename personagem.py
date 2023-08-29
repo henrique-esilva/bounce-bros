@@ -190,13 +190,14 @@ class Animation():
 		if velocidade == False:
 			velocidade = 1
 		else:
-			velocidade = math.copysign(velocidade, 1)/16
+			a = math.copysign(velocidade, 1)
+			velocidade = a/14
 
 		if velocidade == 0: velocidade = 1
 
 		if self.rodando:
 
-			self.index += 0.5 * velocidade
+			self.index += velocidade *0.5
 			if math.floor( self.index ) >= len(self.content):
 				if type(self.repeteco)==int:
 					self.index = self.repeteco
@@ -240,9 +241,9 @@ murasaki.animations.fast_walking.set( 'characters//murasaki//andando', 23 )
 murasaki.animations.fast_walking.configura(0)
 murasaki.animations.fast_walking.turnOn()
 
-murasaki.animations.breaking.set( 'characters//murasaki//andando', 70 )
-murasaki.animations.breaking.configura(0)
-murasaki.animations.breaking.turnOn()
+#murasaki.animations.breaking.set( 'characters//murasaki//andando', 70 )
+#murasaki.animations.breaking.configura(0)
+#murasaki.animations.breaking.turnOn()
 
 # I will make a `slash` animation for murasaki. Will have also a function to attack, that switches
 # the current animation for `slash` and places a object in scene that deals damage to enemies.
@@ -251,9 +252,9 @@ murasaki.rect = murasaki.animations.walking.content[0].get_rect()
 murasaki.rect.left = 0
 
 def murasaki_animation_extra_adjust( blabla:any ):
-	if math.copysign( murasaki.fisica.velocidade_lateral, 1 ) > 9:
+	if math.copysign( murasaki.fisica.velocidade_lateral, 1 ) >= 10:
 		murasaki.current_animation = murasaki.animations.fast_walking
-murasaki.funcoes.insert( 1, murasaki_animation_extra_adjust )
+#murasaki.funcoes.insert( 1, murasaki_animation_extra_adjust )
 
 drexa = Personagem()
 
@@ -274,15 +275,15 @@ drexa.rect.left = 300
 
 logan = Personagem()
 
-logan.animations.idle.set( 'characters//drexa//logan//attack' )
+logan.animations.idle.set( 'characters//drexa//logan//idle' )
 logan.animations.idle.configura(0)
 logan.animations.idle.turnOn()
-logan.animations.walking.set( 'characters//drexa//logan//walking' )
+logan.animations.walking.set( 'characters//drexa//logan//walk' )
 logan.animations.walking.configura(0)
 logan.animations.walking.turnOn()
 
 logan.rect=logan.current_animation.content[0].get_rect()
-logan.rect.left=200
+logan.rect.left=180
 
 
 arquimago = Personagem()
@@ -322,7 +323,8 @@ monstrinho.fisica.retangulo_do_corpo.width = 30
 
 
 boca=Personagem()
-boca.animations.idle.set( 'characters\\boca\\flutuando' )
+boca.animations.idle.set( 'characters\\boca\\disturbing', 135)
+boca.animations.idle.configura(35)
 boca.animations.idle.turnOn()
 
 boca.rect.left= -200
@@ -332,13 +334,14 @@ boca.rect.top=100
 maguinho = Personagem()
 
 maguinho.current_animation = maguinho.animations.idle
-maguinho.current_animation.set( 'characters\\boca\\flutuando' ) #pequeno mago\idle' )
+maguinho.current_animation.set( 'characters\\boca\\idle-fly') #( 'characters\\boca\\flutuando' ) #pequeno mago\idle' )
 maguinho.current_animation.configura(0)
 maguinho.current_animation.turnOn()
 
-#maguinho.animations.walking.set( 'characters\\boca\walk-fly' ) #pequeno mago\idle' )
-#maguinho.animations.walking.configura(0)
-#maguinho.animations.walking.turnOn()
+maguinho.animations.walking.set( 'characters\\boca\\walk-fly' )
+maguinho.animations.walking.configura(0)
+maguinho.animations.walking.turnOn()
+
 
 maguinho.fisica.afetado_por_gravidade = False
 maguinho.rect = maguinho.animations.idle.content[0].get_rect()
