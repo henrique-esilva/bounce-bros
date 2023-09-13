@@ -1,6 +1,7 @@
 from personagem import murasaki, drexa, arquimago, cyber, maguinho, logan
 from renderiza import *
 from moving_functions import *
+from functools import partial
 
 import objetos
 
@@ -9,20 +10,12 @@ objetos.monstrinho.funcoes.append( movimentacao_automatica_senoidal )
 
 imagem_coracao = pygame.image.load( "efeitos\\coracao.png" )
 
-root_funcoes =       [gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
-murasaki.funcoes +=  [gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
-drexa.funcoes +=     [gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
-arquimago.funcoes += [gravidade, colisao_com_plataformas]
-cyber.funcoes +=     [gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
-maguinho.funcoes +=  [gravidade, colisao_com_plataformas]
-logan.funcoes +=     root_funcoes
-
-murasaki.modo_de_controle = ( controle_lateral_pula, 10 )
-drexa.modo_de_controle = ( controle_lateral_pula, 10 )
-arquimago.modo_de_controle = ( controle_voo, 8 )
-cyber.modo_de_controle = ( controle_lateral_pula, 8 )
-maguinho.modo_de_controle = ( controle_voo, 8 )
-logan.modo_de_controle = ( controle_lateral_pula, 8 )
+murasaki.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
+drexa.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta)
+cyber.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
+logan.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
+arquimago.modo_de_controle = ( controle_voo, 8, desaceleracao_aerea )
+maguinho.modo_de_controle = ( controle_voo, 8, desaceleracao_aerea )
 
     # salto base
     # mulplicador de velocidade
@@ -37,6 +30,23 @@ murasaki.multiplicadores_de_velocidade = (12, {False: 1, True:2  })
 drexa.   multiplicadores_de_velocidade = (12, {False: 1, True:1  })
 cyber.   multiplicadores_de_velocidade = ( 4, {False: 1, True:-2 })
 logan.   multiplicadores_de_velocidade = ( 8, {False: 1, True:2  })
+
+def controle_adequado_efetivo1( character ):
+    character.modo_de_controle[0]( character, 0, character.modo_de_controle[1] )
+def controle_adequado_efetivo2( character ):
+    character.modo_de_controle[0]( character, 1, character.modo_de_controle[1] )
+def controle_adequado_passivo( character ):
+    character.modo_de_controle[2]( character )
+def movimentacao_padrao( character, atividade:int ):
+    (controle_adequado_passivo, controle_adequado_efetivo1, controle_adequado_efetivo2)[atividade](character)
+
+root_funcoes =       [gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
+murasaki.funcoes +=  [gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
+drexa.funcoes +=     [gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
+arquimago.funcoes += [gravidade, colisao_com_plataformas]
+cyber.funcoes +=     [gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
+maguinho.funcoes +=  [gravidade, colisao_com_plataformas]
+logan.funcoes +=     root_funcoes
 
 indice_player = 0
 tempo_de_atraso_para_alternancia = 200
@@ -83,8 +93,7 @@ def desenha_coracoes():
             x += 1
         y += 1
 
-def remove_personagem():
-    global indice_player
+def remove_personagem( indice_player ):
     y = 0
     for i in objetos.personagens:
         for inimigo in objetos.fantasminhas:
@@ -111,20 +120,21 @@ def main():
     alterna_personagem()
 
     player = objetos.personagens[ indice_player ]
-    #player2 = objetos.personagens[ indice_player-1 ]
-
-    rel_p1 = (get_rel_char(player )[0], get_rel_char(player )[1])
-    #rel_p2 = (get_rel_char(player2)[0]-pre_size[0]/4, get_rel_char(player2)[1])
+    player2 = objetos.personagens[ indice_player-1 ]
 
     for character in objetos.personagens:
-        if character == player:
-            character.modo_de_controle[0]( character, 0, character.modo_de_controle[1] )
-        #elif character == player2:
-        #    character.modo_de_controle[0]( character, 1, character.modo_de_controle[1] )
-        elif character.modo_de_controle[0] != controle_voo:
-            desacelera_move_lateral_ajusta( character )
-        else:
-            desaceleracao_aerea( character )
+        movimentacao_padrao(character, int(character==player)+2*int(character==player2))
+
+    for i in objetos.fantasminhas + objetos.personagens:
+        i.current_animation.run()# i.fisica.velocidade_lateral )
+        i.run()
+
+    rel_p1 = (get_rel_char(player )[0]-pre_size[0]/4, get_rel_char(player )[1])
+    rel_p2 = (get_rel_char(player2)[0]-pre_size[0]/4, get_rel_char(player2)[1])
+
+    for i in objetos.fantasminhas + objetos.personagens:
+        renderiza_personagem( i, pre_tela, rel_p1 )
+        renderiza_personagem( i, mini_tela, rel_p2 )
 
     for i in objetos.particulas:
 
@@ -133,23 +143,11 @@ def main():
 
         i.current_animation.run()
         renderiza_particula( i, pre_tela, rel_p1 )
-        #renderiza_particula( i, mini_tela, rel_p2 )
+        renderiza_particula( i, mini_tela, rel_p2 )
 
-    for i in objetos.fantasminhas:
-        i.run()
-        i.current_animation.run()# i.fisica.velocidade_lateral )
-        renderiza_personagem( i, pre_tela, rel_p1 )
-        #renderiza_personagem( i, mini_tela, rel_p2 )
-
-    for i in objetos.personagens:
-        i.current_animation.run()# i.fisica.velocidade_lateral )
-        i.run()
-        renderiza_personagem( i, pre_tela, rel_p1 )
-        #renderiza_personagem( i, mini_tela, rel_p2 )
-
-    remove_personagem()
+    remove_personagem(indice_player)
 
     renderiza_tiles( objetos.plataformas, pre_tela, rel_p1 )
-    #renderiza_tiles( objetos.plataformas, mini_tela, rel_p2 )
+    renderiza_tiles( objetos.plataformas, mini_tela, rel_p2 )
     desenha_coracoes()
-    renderiza_tela()
+    renderiza_multitela()

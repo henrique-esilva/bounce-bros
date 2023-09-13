@@ -60,8 +60,8 @@ def renderiza_multitela():
     pre_tela.blit( mini_tela, (pre_size[0]/2, 0) )
     screen.blit( pygame.transform.scale(pre_tela, size), pygame.Rect(0, 0, 0, 0))
     pygame.display.flip()
-    mini_tela.fill(color.colorOrange)
-    pre_tela.fill(color.colorGrey)
+    mini_tela.fill( (15, 15, 18) )
+    pre_tela.fill(color.colorBlueyGrey)
 
 def renderiza_tela():
     screen.blit( pygame.transform.scale(pre_tela, size), pygame.Rect(0, 0, 0, 0))
