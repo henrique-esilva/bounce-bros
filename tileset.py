@@ -26,13 +26,23 @@ tileset = [
     ( 6, 4),
     ( 7, 4),
     ( 7, 5),
-
-    ( 5, 7),
-    ( 6, 7),
 ]
 
 for i in range(7, 20):
     tileset.append((i, 6))
+
+for x in range(-2, 7):
+    for y in range(7, 12):
+        tileset.append((x, y))
+
+tileset.remove(( 5, 7))
+tileset.remove(( 4, 7))
+for x in range(4):
+    for y in range(3-x):
+        tileset.remove((2+x, 8+y))
+for x in range(-1, 2):
+    for y in range( 8,11):
+        tileset.remove(( x, y))
 
 plataformas = [
 ]
