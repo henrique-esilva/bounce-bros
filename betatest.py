@@ -120,21 +120,21 @@ def main():
     alterna_personagem()
 
     player = objetos.personagens[ indice_player ]
-    player2 = objetos.personagens[ indice_player-1 ]
+    #player2 = objetos.personagens[ indice_player-1 ]
 
     for character in objetos.personagens:
-        movimentacao_padrao(character, int(character==player)+2*int(character==player2))
+        movimentacao_padrao(character, int(character==player)) #+2*int(character==player2))
 
     for i in objetos.fantasminhas + objetos.personagens:
         i.current_animation.run()# i.fisica.velocidade_lateral )
         i.run()
 
-    rel_p1 = (get_rel_char(player )[0]-pre_size[0]/4, get_rel_char(player )[1])
-    rel_p2 = (get_rel_char(player2)[0]-pre_size[0]/4, get_rel_char(player2)[1])
+    rel_p1 = (get_rel_char(player ))#[0]-pre_size[0]/4, get_rel_char(player )[1])
+    #rel_p2 = (get_rel_char(player2)[0]-pre_size[0]/4, get_rel_char(player2)[1])
 
     for i in objetos.fantasminhas + objetos.personagens:
         renderiza_personagem( i, pre_tela, rel_p1 )
-        renderiza_personagem( i, mini_tela, rel_p2 )
+        #renderiza_personagem( i, mini_tela, rel_p2 )
 
     for i in objetos.particulas:
 
@@ -143,11 +143,11 @@ def main():
 
         i.current_animation.run()
         renderiza_particula( i, pre_tela, rel_p1 )
-        renderiza_particula( i, mini_tela, rel_p2 )
+        #renderiza_particula( i, mini_tela, rel_p2 )
 
     remove_personagem(indice_player)
 
     renderiza_tiles( objetos.plataformas, pre_tela, rel_p1 )
-    renderiza_tiles( objetos.plataformas, mini_tela, rel_p2 )
+    #renderiza_tiles( objetos.plataformas, mini_tela, rel_p2 )
     desenha_coracoes()
-    renderiza_multitela()
+    renderiza_tela()
