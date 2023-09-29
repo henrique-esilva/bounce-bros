@@ -1,11 +1,8 @@
 import pygame
 from pygame.locals import *
 
-import screen_size
-import renderiza
-
-import objetos
-import efeitos_visuais
+import screen_size, renderiza, objetos, efeitos_visuais
+from algoritmo_de_colisao import intervalo_retroativo
 
 import math
 
@@ -138,7 +135,7 @@ def colisao_com_plataformas( personagem, vetor_plataformas = objetos.plataformas
                 # se queremos mover a personagem para a direita, usaremos a subtração da lateral direita da
                 # plataforma pela lateral esquerda da personagem.
 
-                sinal = math.copysign( 1 , plataforma.centerx-personagem.rect.centerx ) #personagem.fisica.velocidade_lateral )
+                sinal = math.copysign( 1, plataforma.centerx-(personagem.rect.centerx-personagem.fisica.velocidade_lateral) ) #personagem.fisica.velocidade_lateral )
 
                 personagem.rect.centerx = sinal + ( plataforma.centerx - sinal * plataforma.width/2 ) - ( 
                     sinal * personagem.fisica.retangulo_do_corpo.width/2 )
@@ -146,6 +143,27 @@ def colisao_com_plataformas( personagem, vetor_plataformas = objetos.plataformas
                 personagem.fisica.velocidade_lateral = 0
 
                 personagem.ajusta_retangulos()
+
+        # else:
+        #     a = intervalo_retroativo(personagem.fisica.retangulo_do_corpo, personagem.fisica.velocidade_lateral , 0)
+        #     b = intervalo_retroativo(personagem.fisica.retangulo_do_corpo, personagem.fisica.velocidade_de_queda, 1)
+        #     if Rect(a[0], b[0], a[1], 1   ).colliderect(plataforma) and a[1]-a[0] >= plataforma.width:
+        #         print("brabo")
+        #         personagem.rect.move_ip(
+        #             (
+        #                 math.copysign(
+        #                     plataforma.right -
+        #                     personagem.fisica.retangulo_do_corpo. left, 1
+        #                     ),
+        #                 math.copysign(
+        #                     personagem.fisica.retangulo_do_corpo.right -
+        #                     plataforma. left, -1
+        #                     ),
+        #             )[int(personagem.fisica.velocidade_lateral > 0)],
+        #             0
+        #         )
+        #     #if pygame.rect(a[0], b[0],    1, b[1]).colliderect(plataforma):
+        #     #    personagem.rect.move_ip(  )
             
         personagem.ajusta_retangulos()
 

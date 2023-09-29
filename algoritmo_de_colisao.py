@@ -5,4 +5,4 @@ def intervalo_retroativo( rect, velocidade, direcao ):
     ][direcao]
     #define cálculo
     base = conjunto[int(velocidade<0)]
-    return (base, base-velocidade)
+    return sorted((base, base-velocidade))
