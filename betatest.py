@@ -10,7 +10,7 @@ objetos.monstrinho.funcoes.append( movimentacao_automatica_senoidal )
 
 imagem_coracao = pygame.image.load( "efeitos\\coracao.png" )
 
-murasaki.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
+murasaki.modo_de_controle = ( controle_lateral_pula, 10, desacelera_move_lateral_ajusta )
 drexa.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta)
 cyber.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
 logan.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
@@ -26,7 +26,7 @@ logan.   multiplicadores_de_salto = (-28, 1  )
 
     # velocidade minima de ativação
     # multiplicador de velocidade adicional
-murasaki.multiplicadores_de_velocidade = (12, {False: 1, True:2  })
+murasaki.multiplicadores_de_velocidade = (12, {False: 1, True:1  })
 drexa.   multiplicadores_de_velocidade = (12, {False: 1, True:1  })
 cyber.   multiplicadores_de_velocidade = ( 4, {False: 1, True:-2 })
 logan.   multiplicadores_de_velocidade = ( 8, {False: 1, True:2  })
@@ -115,7 +115,7 @@ def main():
     global indice_player
     global player
 
-    pygame.time.Clock().tick(40)
+    pygame.time.Clock().tick(60)#40
 
     alterna_personagem()
 
