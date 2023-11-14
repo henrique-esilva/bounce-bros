@@ -52,6 +52,10 @@ for x in range(4):
 for x in range(-1, 2):
     for y in range( 8,11):
         tileset.remove(( x, y))'''
+
+tileset.sort()
+tileset.reverse()
+
 plataformas = [
 ]
 

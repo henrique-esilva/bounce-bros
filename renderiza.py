@@ -50,11 +50,17 @@ def renderiza_particula( a, superficie=pre_tela, rel_coord=(0, 0) ):
     impressao_de_imagem( superficie, a.current_animation.retorna_quadro(), a.rect, rel_coord )
 
 
-def renderiza_tiles( vetor, superficie=pre_tela, rel_coord=(0,0) ):
+def renderiza_tiles( vetor, image, superficie=pre_tela, rel_coord=(0,0)):
     for i in vetor:
         j=Rect(i)
         j.move_ip(rel_coord)
-        pygame.draw.rect( superficie, color.colorDarkGrey, j, width = 0 )
+        superficie.blit(image, j)
+
+# def renderiza_tiles( vetor, superficie=pre_tela, rel_coord=(0,0) ):
+#     for i in vetor:
+#         j=Rect(i)
+#         j.move_ip(rel_coord)
+#         pygame.draw.rect( superficie, color.colorDarkGrey, j, width = 0 )
 
 def renderiza_multitela():
     pre_tela.blit( mini_tela, (pre_size[0]/2, 0) )
