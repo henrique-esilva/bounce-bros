@@ -14,6 +14,7 @@ import betatest
 
 
 pygame.init()
+#pygame.mixer.init()
 
 
 

@@ -3,7 +3,7 @@ from pygame.locals import *
 
 import graphics, math
 
-
+pygame.mixer.init()
 
 
 class Movimentacao_cossenoidal():
@@ -47,9 +47,15 @@ class Personagem():
 
 		self.center = [0, 0]
 		self.rect = pygame.Rect( 0, 0, 50, 50 )
-		self.funcoes = []
+		self.funcoes = [self.running_sound_play]
 
 		self.modo_de_controle = ( None, None )
+
+		# temporario
+		self.running_sound = pygame.mixer.Sound(file='sound\effects\walky/ocarina.wav')
+		#print(self.running_sound.get_length())
+		self.running_sound.set_volume(0.1)
+		# temporário
 
 
 	def ajusta_retangulos( self ):
@@ -78,6 +84,13 @@ class Personagem():
 				if self.current_animation != self.animations.walking:
 					self.animations.walking.turnOn()
 				self.current_animation = self.animations.walking
+
+	def running_sound_play(self, *args):
+		if self.fisica.velocidade_lateral != 0 and self.fisica.velocidade_de_queda==0:
+			if self.running_sound.get_num_channels()==0:
+				self.running_sound.play(-1, maxtime=1200)
+		else:
+			self.running_sound.stop()
 
 	def run(self):
 
@@ -329,6 +342,11 @@ boca.animations.idle.turnOn()
 
 boca.rect.left= -200
 boca.rect.top=100
+
+boca.movimentacao_cossenoidal = Movimentacao_cossenoidal(600)
+boca.movimentacao_cossenoidal.set_frequencia( 0.2 )
+boca.movimentacao_cossenoidal.set_amplitude( 100 )
+boca.movimentacao_cossenoidal.espaco_angular = 0.5
 
 
 maguinho = Personagem()

@@ -5,12 +5,15 @@ from functools import partial
 
 import objetos
 
-objetos.monstrinho.funcoes.append( movimentacao_automatica_cossenoidal )
-objetos.monstrinho.funcoes.append( movimentacao_automatica_senoidal )
+#objetos.monstrinho.funcoes.append( movimentacao_automatica_cossenoidal )
+#objetos.monstrinho.funcoes.append( movimentacao_automatica_senoidal )
 
+#objetos.boca.funcoes.append( movimentacao_automatica_cossenoidal )
+
+imagem_tile = pygame.image.load( "./tiles/terra-pedra_estendido.png" )
 imagem_coracao = pygame.image.load( "efeitos\\coracao.png" )
 
-murasaki.modo_de_controle = ( controle_lateral_pula, 10, desacelera_move_lateral_ajusta )
+murasaki.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
 drexa.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta)
 cyber.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
 logan.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
@@ -41,10 +44,10 @@ def movimentacao_padrao( character, atividade:int ):
     (controle_adequado_passivo, controle_adequado_efetivo1, controle_adequado_efetivo2)[atividade](character)
 
 root_funcoes =       [gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
-murasaki.funcoes +=  [gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
-drexa.funcoes +=     [gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
+murasaki.funcoes +=  root_funcoes #[gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
+drexa.funcoes +=     root_funcoes #[gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
 arquimago.funcoes += [gravidade, colisao_com_plataformas]
-cyber.funcoes +=     [gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
+cyber.funcoes +=     root_funcoes #[gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
 maguinho.funcoes +=  [gravidade, colisao_com_plataformas]
 logan.funcoes +=     root_funcoes
 
@@ -52,7 +55,7 @@ indice_player = 0
 tempo_de_atraso_para_alternancia = 200
 temporizador_de_atraso_de_alternancia = pygame.time.Clock()
 
-def alterna_personagem():
+def alternancia_personagem():
     global indice_player
     global tempo_de_atraso_para_alternancia
 
@@ -117,7 +120,7 @@ def main():
 
     pygame.time.Clock().tick(60)#40
 
-    alterna_personagem()
+    alternancia_personagem()
 
     player = objetos.personagens[ indice_player ]
     #player2 = objetos.personagens[ indice_player-1 ]
@@ -147,7 +150,7 @@ def main():
 
     remove_personagem(indice_player)
 
-    renderiza_tiles( objetos.plataformas, pre_tela, rel_p1 )
+    renderiza_tiles( objetos.plataformas, imagem_tile, pre_tela, rel_p1 )
     #renderiza_tiles( objetos.plataformas, mini_tela, rel_p2 )
     desenha_coracoes()
     renderiza_tela()
