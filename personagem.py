@@ -176,8 +176,8 @@ class Animation():
 
 	def configura(self, inicioDoLoop):
 
-		"""put an integer will set a index sprite for second time play
-		put False will set the animation playing just once"""
+		"""putting an integer will set an index sprite for second time play
+		putting False will set the animation playing just once"""
 		self.repeteco = inicioDoLoop
 
 	def set(self, path, start = 0, end = 999 ):
@@ -254,9 +254,9 @@ murasaki.animations.fast_walking.set( 'characters//murasaki//andando', 23 )
 murasaki.animations.fast_walking.configura(0)
 murasaki.animations.fast_walking.turnOn()
 
-#murasaki.animations.breaking.set( 'characters//murasaki//andando', 70 )
-#murasaki.animations.breaking.configura(0)
-#murasaki.animations.breaking.turnOn()
+murasaki.animations.breaking.set( 'characters//murasaki//andando', 59 )
+murasaki.animations.breaking.configura(0)
+murasaki.animations.breaking.turnOn()
 
 # I will make a `slash` animation for murasaki. Will have also a function to attack, that switches
 # the current animation for `slash` and places a object in scene that deals damage to enemies.

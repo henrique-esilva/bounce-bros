@@ -13,7 +13,7 @@ import objetos
 imagem_tile = pygame.image.load( "./tiles/terra-pedra_estendido.png" )
 imagem_coracao = pygame.image.load( "efeitos\\coracao.png" )
 
-murasaki.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
+murasaki.modo_de_controle = ( controle_lateral_pula, 10, desacelera_move_lateral_ajusta )
 drexa.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta)
 cyber.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
 logan.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
