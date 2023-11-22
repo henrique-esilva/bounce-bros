@@ -16,7 +16,7 @@ pre_size = screen_size.pre_size
 pre_tela = pygame.surface.Surface(pre_size)
 pre_tela_rect = pre_tela.get_rect()
 
-mini_tela = pygame.Surface((pre_size[0]/2,pre_size[1]))
+mini_tela = pygame.Surface( (pre_size[0]/2,pre_size[1]) )
 
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 
@@ -24,7 +24,7 @@ pygame.display.set_caption(" Jump Tales =^-^= ")
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 
 flags = pygame.SCALED
-screen = pygame.display.set_mode(size, flags)
+screen = pygame.display.set_mode(size)
 #pygame.display.toggle_fullscreen()
 
 
@@ -51,10 +51,16 @@ def renderiza_particula( a, superficie=pre_tela, rel_coord=(0, 0) ):
 
 
 def renderiza_tiles( vetor, image, superficie=pre_tela, rel_coord=(0,0)):
+    """Get a vetor of coordinates, and pygame.Surface image, a pygame.Surface
+    screen and a relative coordinate rel_coord
+    Make sure that all coordinates are in bidimentional format (x, y)
+
+    relative coordinate is used to move the image before rendering"""
     for i in vetor:
         j=Rect(i)
         j.move_ip(rel_coord)
         superficie.blit(image, j)
+
 
 # def renderiza_tiles( vetor, superficie=pre_tela, rel_coord=(0,0) ):
 #     for i in vetor:
@@ -62,12 +68,21 @@ def renderiza_tiles( vetor, image, superficie=pre_tela, rel_coord=(0,0)):
 #         j.move_ip(rel_coord)
 #         pygame.draw.rect( superficie, color.colorDarkGrey, j, width = 0 )
 
+
+def renderiza_tilesetpack(tilesetpack, superficie, rel_coord, tam):
+    for i in tilesetpack[1]:
+        #j=Rect(i)
+        #j.move_ip(rel_coord)
+        superficie.blit(tilesetpack[0], (i[0]*tam[0]+rel_coord[0], i[1]*tam[1]+rel_coord[1]))
+
+
 def renderiza_multitela():
     pre_tela.blit( mini_tela, (pre_size[0]/2, 0) )
     screen.blit( pygame.transform.scale(pre_tela, size), pygame.Rect(0, 0, 0, 0))
     pygame.display.flip()
     mini_tela.fill( (15, 15, 18) )
     pre_tela.fill(color.colorBlueyGrey)
+
 
 def renderiza_tela():
     screen.blit( pygame.transform.scale(pre_tela, size), pygame.Rect(0, 0, 0, 0))

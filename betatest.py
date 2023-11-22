@@ -4,13 +4,14 @@ from moving_functions import *
 from functools import partial
 
 import objetos
+from tileset import array as tileset_array, tamanho_dos_tiles
 
 #objetos.monstrinho.funcoes.append( movimentacao_automatica_cossenoidal )
 #objetos.monstrinho.funcoes.append( movimentacao_automatica_senoidal )
 
 #objetos.boca.funcoes.append( movimentacao_automatica_cossenoidal )
 
-imagem_tile = pygame.image.load( "./tiles/terra-pedra_estendido.png" )
+#imagem_tile = pygame.image.load( "./tiles/terra-pedra_estendido.png" )
 imagem_coracao = pygame.image.load( "efeitos\\coracao.png" )
 
 murasaki.modo_de_controle = ( controle_lateral_pula, 10, desacelera_move_lateral_ajusta )
@@ -150,7 +151,8 @@ def main():
 
     remove_personagem(indice_player)
 
-    renderiza_tiles( objetos.plataformas, imagem_tile, pre_tela, rel_p1 )
+    for i in range(len(tileset_array)):
+        renderiza_tilesetpack( tileset_array[i], pre_tela, rel_p1, tamanho_dos_tiles )
     #renderiza_tiles( objetos.plataformas, mini_tela, rel_p2 )
     desenha_coracoes()
     renderiza_tela()

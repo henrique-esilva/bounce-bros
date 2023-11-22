@@ -1,11 +1,11 @@
 from personagem import personagens as lista_personagens, monstrinho, boca
-import tileset
+from tileset import plataformas
 import efeitos_visuais
 
 personagens = lista_personagens
 fantasminhas = [ monstrinho, boca ]
 particulas = []
-plataformas = tileset.plataformas
+plataformas = plataformas
 
 def adiciona_particula( nome , posicao ):
     caminho = efeitos_visuais.animacoes[ nome ]

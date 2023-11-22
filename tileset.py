@@ -3,6 +3,27 @@ from pygame.locals import *
 
 tamanho_dos_tiles = ( 96, 96 ) #(64, 64) #(96, 96)
 
+# crie uma array
+# preencha esta array com pacotes de tileset
+# cada pacote terá uma imagem e várias coordenadas
+# a imagem deverá ser exibida em cada coordenada do vetor durante o jogo
+# as coordenadas deverão ser reposicionadas de acordo com a coordenada relativa da personagem
+
+# monte um sistema de empacotamento de tileset's
+# desenvolva uma função que exiba a imagem em todas as coordenadas do tilesetpack
+# armazene os tilesetpacks de maneira compacta
+
+array = []
+
+tilesetpack = (
+    pygame.image.load('./tiles/chao-verde1.png'),
+    [
+        (-1, 0),
+        ( 0, 0),
+        ( 1, 0),
+        ]
+    )
+
 tileset = [
     # colunas
     (-2, 5),
@@ -63,3 +84,7 @@ for i in tileset:
     plataformas.append(
         pygame.Rect( tamanho_dos_tiles[0]*i[0], tamanho_dos_tiles[1]*i[1], tamanho_dos_tiles[0], tamanho_dos_tiles[1] )
     )
+
+tileset = (pygame.image.load( "./tiles/terra-pedra_estendido.png" ), tileset)
+array.append(tileset)
+array.append(tilesetpack)
