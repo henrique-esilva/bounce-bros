@@ -119,7 +119,7 @@ def main():
     global indice_player
     global player
 
-    pygame.time.Clock().tick(60)#40
+    pygame.time.Clock().tick(30)#40
 
     alternancia_personagem()
 
@@ -130,7 +130,7 @@ def main():
         movimentacao_padrao(character, int(character==player)) #+2*int(character==player2))
 
     for i in objetos.fantasminhas + objetos.personagens:
-        i.current_animation.run()# i.fisica.velocidade_lateral )
+        i.current_animation.run()#i.fisica.velocidade_lateral )
         i.run()
 
     rel_p1 = (get_rel_char(player ))#[0]-pre_size[0]/4, get_rel_char(player )[1])
