@@ -267,7 +267,7 @@ murasaki.rect.left = 0
 def murasaki_animation_extra_adjust( blabla:any ):
 	if math.copysign( murasaki.fisica.velocidade_lateral, 1 ) >= 10:
 		murasaki.current_animation = murasaki.animations.fast_walking
-murasaki.funcoes.insert( 1, murasaki_animation_extra_adjust )
+#murasaki.funcoes.insert( 1, murasaki_animation_extra_adjust )
 
 drexa = Personagem()
 

@@ -40,7 +40,7 @@ def impressao_de_imagem( superficie, imagem, rect, rel_coord=(0,0) ):
 
 def renderiza_personagem( a, superficie=pre_tela, rel_coord=(0, 0) ):
     imagem = pygame.transform.flip( a.current_animation.retorna_quadro(), a.left, 0 )
-    imagem = pygame.transform.rotate( imagem, a.fisica.angulo_de_rotacao )
+    #imagem = pygame.transform.rotate( imagem, a.fisica.angulo_de_rotacao )
     rect = imagem.get_rect()
     rect.center = a.rect.center
     impressao_de_imagem( superficie, imagem , rect, rel_coord )
