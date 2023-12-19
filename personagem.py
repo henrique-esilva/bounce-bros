@@ -1,7 +1,7 @@
 import pygame, sys
 from pygame.locals import *
 
-import graphics, math
+from animation import *
 
 pygame.mixer.init()
 
@@ -47,15 +47,13 @@ class Personagem():
 
 		self.center = [0, 0]
 		self.rect = pygame.Rect( 0, 0, 50, 50 )
-		self.funcoes = [self.running_sound_play]
+		self.funcoes = []
 
 		self.modo_de_controle = ( None, None )
 
 		# temporario
-		self.running_sound = pygame.mixer.Sound(file='sound\effects\walky/ocarina.wav')
-		#print(self.running_sound.get_length())
-		self.running_sound.set_volume(0.1)
-		# temporário
+		#self.running_sound = pygame.mixer.Sound(file='sound\effects\walky/ocarina.wav')
+		#self.running_sound.set_volume(0.1)
 
 
 	def ajusta_retangulos( self ):
@@ -144,102 +142,11 @@ class Fisica():
 
 
 
-class AnimationClass():
-
-	def __init__(self):
-
-		self.idle = Animation()
-		self.walking = Animation()
-		self.breaking = Animation()
-
-
-class LiteAnimation():
-	def __init__(self):
-		self.sprite = None
-		self.repeteco = False
-		self.rodando = False
-		self.index = 0
-
-	def configura(self, inicioDoLoop):
-		self.inicioDoLoop = inicioDoLoop
-
-
-class Animation():
-
-	def __init__(self):
-
-		self.content = []
-		self.repeteco = 0
-		self.rodando = False
-		self.index = 0
-
-
-	def configura(self, inicioDoLoop):
-
-		"""putting an integer will set an index sprite for second time play
-		putting False will set the animation playing just once"""
-		self.repeteco = inicioDoLoop
-
-	def set(self, path, start = 0, end = 999 ):
-
-		self.path = path
-		self.content = graphics.import_animation( path, start, end )
-
-	def turnOn(self):
-
-		self.rodando = True
-		self.index = 0
-
-	def turnOff(self):
-
-		self.rodando = False
-
-	def configura_repeteco(self, arg): #remover funcao configura_repeteco()
-		"""deprecated"""
-		self.repetindo = arg
-
-	def run(self, velocidade = 12):
-
-		if velocidade == False:
-			velocidade = 1
-		else:
-			a = math.copysign(velocidade, 1)
-			velocidade = a/14
-
-		if velocidade == 0: velocidade = 1
-
-		if self.rodando:
-
-			self.index += velocidade *0.5
-			if math.floor( self.index ) >= len(self.content):
-				if type(self.repeteco)==int:
-					self.index = self.repeteco
-				else:
-					self.index=0
-					self.turnOff()
-
-	def goto( self, frame:int ):
-		self.index = frame
-
-	def retorna_quadro(self):
-
-		try:
-			if self.rodando:
-				return self.content[math.floor( self.index )]
-			else:
-				return pygame.surface.Surface( (0, 0) )
-
-		except IndexError:
-			print( '\nWARNING: \'index\' invalido para -> \'Animation\' em \'retorna_valor()\'' )
-			print( 'index =', self.index )
-			print( 'efetivo =', math.floor( self.index ) )
-			print( 'len(self.content) = ' + str(len(self.content)) + '\n' )
-			sys.exit()
 
 
 murasaki = Personagem()
 
-murasaki.animations.idle.set( 'characters//murasaki//idle' )
+murasaki.animations.idle.set( 'characters//murasaki//idle', 26)
 murasaki.animations.idle.configura(0)
 murasaki.animations.idle.turnOn()
 
@@ -316,37 +223,37 @@ monstrinho.movimentacao_cossenoidal.set_frequencia( 0.2 )
 monstrinho.movimentacao_cossenoidal.set_amplitude( 100 )
 
 monstrinho.movimentacao_senoidal = Movimentacao_cossenoidal(600)
-monstrinho.movimentacao_senoidal.set_frequencia( 0.2 )
-monstrinho.movimentacao_senoidal.set_amplitude( 100 )
-monstrinho.movimentacao_senoidal.espaco_angular = 0.5
+monstrinho.movimentacao_senoidal.set_frequencia( 0.4 )
+monstrinho.movimentacao_senoidal.set_amplitude( 96 )
+monstrinho.movimentacao_senoidal.espaco_angular = 0
 
 monstrinho.current_animation = monstrinho.animations.idle
-monstrinho.current_animation.set( 'characters\\boca\idle-fly' ) #pequeno mago\idle' )
+monstrinho.current_animation.set( 'characters//boca//idle-fly' ) # 'characters\\boca\idle-fly' ) #pequeno mago\idle' )
 monstrinho.current_animation.configura(0)
 monstrinho.current_animation.turnOn()
 
-monstrinho.animations.walking.set( 'characters\\boca\walk-fly' ) #pequeno mago\idle' )
-monstrinho.animations.walking.configura(0)
-monstrinho.animations.walking.turnOn()
+#monstrinho.animations.walking.set( 'characters\\boca\walk-fly' ) #pequeno mago\idle' )
+#monstrinho.animations.walking.configura(0)
+#monstrinho.animations.walking.turnOn()
 
-monstrinho.rect = monstrinho.animations.idle.content[0].get_rect()
-monstrinho.rect.top = 128*1.5
+#monstrinho.rect = monstrinho.animations.idle.content[0].get_rect()
+monstrinho.rect.top = 96+28
 monstrinho.rect.left = 1000
 monstrinho.fisica.retangulo_do_corpo.width = 30
 
 
 boca=Personagem()
-boca.animations.idle.set( 'characters\\boca\\disturbing', 135)
-boca.animations.idle.configura(35)
+boca.animations.idle.set( 'characters\\boca\\idle-fly' )
+boca.animations.idle.configura(0)
 boca.animations.idle.turnOn()
 
-boca.rect.left= -200
-boca.rect.top=100
+boca.rect.centerx= -96*3.5
+boca.rect.top= 96+28
 
-boca.movimentacao_cossenoidal = Movimentacao_cossenoidal(600)
-boca.movimentacao_cossenoidal.set_frequencia( 0.2 )
-boca.movimentacao_cossenoidal.set_amplitude( 100 )
-boca.movimentacao_cossenoidal.espaco_angular = 0.5
+boca.movimentacao_senoidal = Movimentacao_cossenoidal(600)
+boca.movimentacao_senoidal.set_frequencia( 0.4 )
+boca.movimentacao_senoidal.set_amplitude( 96 )
+boca.movimentacao_senoidal.espaco_angular = 0
 
 
 maguinho = Personagem()

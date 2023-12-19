@@ -3,7 +3,9 @@ from pygame.locals import *
 
 tamanho_dos_tiles = ( 96, 96 ) #(64, 64) #(96, 96)
 
+#isso vai para renderiza.py
 __tilemappacks = []
+#isso vai para objetos
 plataformas = []
 
 # crie uma array
@@ -18,16 +20,11 @@ plataformas = []
 
 array = []
 
-tilemappack_grass = (
-    pygame.image.load('./tiles/chao-verde1.png'),
-    [
-        (-1, 0),
-        ( 0, 0),
-        ( 1, 0),
-        ]
-    )
+def settmpck(img_path, tileset:list):
+	return ( pygame.image.load(img_path), tileset )
 
 tilemappack_ground = [(x, y) for x in range(-20, 20) for y in range(2, 4)]
+tilemappack_ground.extend([(-3, 1), (-5, 1)])
 '''    # colunas
     (-2, 5),
     (-2, 4),
@@ -74,5 +71,4 @@ for i in tilemappack_ground:
 
 tilemappack_ground = (pygame.image.load( "./tiles/terra-pedra_estendido.png" ), tilemappack_ground)
 
-array.append(tilemappack_grass)
 array.append(tilemappack_ground)

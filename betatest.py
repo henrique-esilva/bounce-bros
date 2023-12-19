@@ -6,12 +6,10 @@ from functools import partial
 import objetos
 from tileset import array as tileset_array, tamanho_dos_tiles
 
+objetos.monstrinho.funcoes.append( movimentacao_automatica_senoidal )
 #objetos.monstrinho.funcoes.append( movimentacao_automatica_cossenoidal )
-#objetos.monstrinho.funcoes.append( movimentacao_automatica_senoidal )
+objetos.boca.funcoes.append( movimentacao_automatica_senoidal )
 
-#objetos.boca.funcoes.append( movimentacao_automatica_cossenoidal )
-
-#imagem_tile = pygame.image.load( "./tiles/terra-pedra_estendido.png" )
 imagem_coracao = pygame.image.load( "efeitos\\coracao.png" )
 
 murasaki.modo_de_controle = ( controle_lateral_pula, 10, desacelera_move_lateral_ajusta )
@@ -52,6 +50,7 @@ cyber.funcoes +=     root_funcoes #[gravidade, rebate, colisao_com_plataformas, 
 maguinho.funcoes +=  [gravidade, colisao_com_plataformas]
 logan.funcoes +=     root_funcoes
 
+
 indice_player = 0
 tempo_de_atraso_para_alternancia = 200
 temporizador_de_atraso_de_alternancia = pygame.time.Clock()
@@ -71,6 +70,10 @@ def alternancia_personagem():
             tempo_de_atraso_para_alternancia = 200
     if indice_player >= len(objetos.personagens):
         indice_player = len(objetos.personagens)-1
+
+def gambiarra_espada():
+    if pygame.key.get_pressed()[K_b]:
+        objetos.swmmon_espada_voadora(player.rect.center, (player.fisica.velocidade_lateral*3, player.fisica.velocidade_de_queda), [gravidade, colisao_com_plataformas, desacelera_move_lateral_ajusta])
 
 def move_todos_pela_tela():
     distancia_a_mover = pre_tela_rect.centerx - player.rect.centerx
@@ -119,9 +122,10 @@ def main():
     global indice_player
     global player
 
-    pygame.time.Clock().tick(30)#40
+    pygame.time.Clock().tick(30)#40)
 
     alternancia_personagem()
+    gambiarra_espada()
 
     player = objetos.personagens[ indice_player ]
     #player2 = objetos.personagens[ indice_player-1 ]
@@ -139,6 +143,12 @@ def main():
     for i in objetos.fantasminhas + objetos.personagens:
         renderiza_personagem( i, pre_tela, rel_p1 )
         #renderiza_personagem( i, mini_tela, rel_p2 )
+
+    for i in objetos.obj_moveis:
+        i.run()
+        i.current_animation.run()
+        renderiza_particula( i, pre_tela, rel_p1 )
+
 
     for i in objetos.particulas:
 
