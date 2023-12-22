@@ -6,6 +6,7 @@ class Fisica():
 		self.velocidade_de_queda = 0
 		self.afetado_por_gravidade = True
 
+		self.coeficiente_de_rotacao = 1
 		self.velocidade_de_rotacao = 0
 		self.angulo_de_rotacao = 0
 

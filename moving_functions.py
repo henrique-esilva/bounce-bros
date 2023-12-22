@@ -5,6 +5,7 @@ import screen_size, renderiza, objetos, efeitos_visuais
 from algoritmo_de_colisao import intervalo_retroativo
 
 import math
+from functools import partial
 
 size = screen_size.size
 pre_size = screen_size.pre_size
@@ -216,13 +217,18 @@ def is_landed( coisa ):
     return False
 
 
+def gatilho_islanded_delme(obj):
+    if is_landed(obj):
+        obj.delme()
+
+
 def efeito_de_giro( kk ):
     if is_landed( kk ):
         kk.fisica.angulo_de_rotacao = 0
         #kk.fisica.velocidade_de_rotacao = -kk.fisica.velocidade_lateral
     else:
         kk.fisica.velocidade_de_rotacao = -kk.fisica.velocidade_lateral
-        kk.fisica.angulo_de_rotacao += kk.fisica.velocidade_de_rotacao
+        kk.fisica.angulo_de_rotacao += kk.fisica.velocidade_de_rotacao * kk.fisica.coeficiente_de_rotacao
 
 
 def desacelera_move_lateral_ajusta(kk):

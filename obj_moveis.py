@@ -57,10 +57,11 @@ class EspadaVoadora(Elemento):
 		self.current_animation = self.animations.fly
 		self.on_stop = self.delme
 
-		self.comportamento.append(self.stopped)
+		#self.comportamento.append(self.stopped)
 
 		self.graus = 0
 		self.pos = (0, 0)
+		self.left = 0
 		self.rect = pygame.Rect(0, 0, 64, 64)
 
 	def delme(self):

@@ -4,7 +4,6 @@ import efeitos_visuais
 
 from obj_moveis import EspadaVoadora
 
-from copy import copy as cp
 
 personagens = lista_personagens
 fantasminhas = [ monstrinho, boca ]
@@ -17,6 +16,7 @@ def swmmon_espada_voadora(pos, vel, comportamento):
     a.rect.center = pos
     a.fisica.velocidade_lateral  = vel[0]
     a.fisica.velocidade_de_queda = vel[1]
+    a.fisica.coeficiente_de_rotacao = 3
     a.comportamento.extend(comportamento)
     a.ref = obj_moveis
     obj_moveis.append(a)

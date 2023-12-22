@@ -2,7 +2,8 @@ from personagem import murasaki, drexa, arquimago, cyber, maguinho, logan
 from renderiza import *
 from moving_functions import *
 from functools import partial
-
+from math import copysign as cs
+from random import randint
 import objetos
 from tileset import array as tileset_array, tamanho_dos_tiles
 
@@ -72,8 +73,16 @@ def alternancia_personagem():
         indice_player = len(objetos.personagens)-1
 
 def gambiarra_espada():
-    if pygame.key.get_pressed()[K_b]:
-        objetos.swmmon_espada_voadora(player.rect.center, (player.fisica.velocidade_lateral*3, player.fisica.velocidade_de_queda), [gravidade, colisao_com_plataformas, desacelera_move_lateral_ajusta])
+    if pygame.key.get_pressed()[K_SPACE]:
+        objetos.swmmon_espada_voadora(
+            player.rect.center,
+            (
+                {1: -10, 0:10}[player.left]+player.fisica.velocidade_lateral,
+                #(cs(8, player.fisica.velocidade_lateral)+player.fisica.velocidade_lateral, 0)[int(player.fisica.velocidade_lateral==0)],
+                -randint(10,18) +player.fisica.velocidade_de_queda
+            ),
+            [gravidade, colisao_com_plataformas, desacelera_move_lateral_ajusta, gatilho_islanded_delme, efeito_de_giro]
+        )
 
 def move_todos_pela_tela():
     distancia_a_mover = pre_tela_rect.centerx - player.rect.centerx
@@ -147,7 +156,7 @@ def main():
     for i in objetos.obj_moveis:
         i.run()
         i.current_animation.run()
-        renderiza_particula( i, pre_tela, rel_p1 )
+        renderiza_inversao_giro( i, pre_tela, rel_p1 )
 
 
     for i in objetos.particulas:

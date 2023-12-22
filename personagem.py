@@ -2,6 +2,7 @@ import pygame, sys
 from pygame.locals import *
 
 from animation import *
+from fisica import Fisica
 
 pygame.mixer.init()
 
@@ -123,7 +124,7 @@ class Personagem():
 
 
 
-
+'''
 class Fisica():
 	def __init__(self):
 		self.velocidade_lateral = 0
@@ -139,7 +140,7 @@ class Fisica():
 		self.retangulo_da_cabeca = pygame.Rect( 0, 0, 36, 17 )
 
 		self.retangulo_dos_pes = pygame.Rect( 0, 0, 36, 30 )
-
+'''
 
 
 

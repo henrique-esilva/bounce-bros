@@ -38,6 +38,14 @@ def impressao_de_imagem( superficie, imagem, rect, rel_coord=(0,0) ):
     superficie.blit( imagem, j )
 
 
+def renderiza_inversao_giro( a, superficie=pre_tela, rel_coord=(0, 0) ):
+    imagem = pygame.transform.flip( a.current_animation.retorna_quadro(), a.left, 0 )
+    imagem = pygame.transform.rotate( imagem, a.fisica.angulo_de_rotacao )
+    rect = imagem.get_rect()
+    rect.center = a.rect.center
+    impressao_de_imagem( superficie, imagem , rect, rel_coord )
+
+
 def renderiza_personagem( a, superficie=pre_tela, rel_coord=(0, 0) ):
     imagem = pygame.transform.flip( a.current_animation.retorna_quadro(), a.left, 0 )
     #imagem = pygame.transform.rotate( imagem, a.fisica.angulo_de_rotacao )
@@ -53,7 +61,7 @@ def renderiza_particula( a, superficie=pre_tela, rel_coord=(0, 0) ):
 def renderiza_tiles( vetor, image, superficie=pre_tela, rel_coord=(0,0)):
     """Get a vetor of coordinates, and pygame.Surface image, a pygame.Surface
     screen and a relative coordinate rel_coord
-    Make sure that all coordinates are in bidimentional format (x, y)
+    Make sure that all coordinates have bidimentional format (x, y)
 
     relative coordinate is used to move the image before rendering"""
     for i in vetor:
