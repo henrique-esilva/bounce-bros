@@ -45,10 +45,12 @@ class Elemento():
 
 class EspadaVoadora(Elemento):
 
-	def __init__(self):
+	def __init__(self, left=0):
 		super().__init__()
 		self.animations.idle.set('efeitos//espada//girando')
+		self.animations.idle.configura(0)
 		self.animations.idle.turnOn()
+
 		self.animations.fly = Animation()
 		self.animations.fly.set('efeitos//espada//girando')
 		self.animations.fly.configura(0)
@@ -57,19 +59,14 @@ class EspadaVoadora(Elemento):
 		self.current_animation = self.animations.fly
 		self.on_stop = self.delme
 
-		#self.comportamento.append(self.stopped)
-
 		self.graus = 0
 		self.pos = (0, 0)
-		self.left = 0
+		self.left = left
+
 		self.rect = pygame.Rect(0, 0, 64, 64)
 
 	def delme(self):
 		self.ref.remove(self)
-
-	def stopped(self, arg):
-		if self.fisica.velocidade_lateral == 0:
-			self.delme()
 
 
 def giraespada(espada):

@@ -13,7 +13,7 @@ objetos.boca.funcoes.append( movimentacao_automatica_senoidal )
 
 imagem_coracao = pygame.image.load( "efeitos\\coracao.png" )
 
-murasaki.modo_de_controle = ( controle_lateral_pula, 10, desacelera_move_lateral_ajusta )
+murasaki.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
 drexa.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta)
 cyber.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
 logan.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
@@ -81,8 +81,10 @@ def gambiarra_espada():
                 #(cs(8, player.fisica.velocidade_lateral)+player.fisica.velocidade_lateral, 0)[int(player.fisica.velocidade_lateral==0)],
                 -randint(10,18) +player.fisica.velocidade_de_queda
             ),
-            [gravidade, colisao_com_plataformas, desacelera_move_lateral_ajusta, gatilho_islanded_delme, efeito_de_giro]
+            [gravidade, colisao_com_plataformas, desacelera_move_lateral_ajusta, gatilho_islanded_delme, efeito_de_giro],
+            player.left
         )
+
 
 def move_todos_pela_tela():
     distancia_a_mover = pre_tela_rect.centerx - player.rect.centerx
