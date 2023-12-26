@@ -229,11 +229,11 @@ monstrinho.movimentacao_senoidal.set_amplitude( 96 )
 monstrinho.movimentacao_senoidal.espaco_angular = 0
 
 monstrinho.current_animation = monstrinho.animations.idle
-monstrinho.current_animation.set( 'characters//boca//idle-fly' ) # 'characters\\boca\idle-fly' ) #pequeno mago\idle' )
+monstrinho.current_animation.set( 'characters//boca//flutuando', 76 ) # 'characters\\boca\idle-fly' ) #pequeno mago\idle' )
 monstrinho.current_animation.configura(0)
 monstrinho.current_animation.turnOn()
 
-#monstrinho.animations.walking.set( 'characters\\boca\walk-fly' ) #pequeno mago\idle' )
+#monstrinho.animations.walking.set( 'characters\\boca\\flutuando', 76 ) #pequeno mago\idle' )
 #monstrinho.animations.walking.configura(0)
 #monstrinho.animations.walking.turnOn()
 
@@ -244,7 +244,7 @@ monstrinho.fisica.retangulo_do_corpo.width = 30
 
 
 boca=Personagem()
-boca.animations.idle.set( 'characters\\boca\\idle-fly' )
+boca.animations.idle.set( 'characters\\boca\\flutuando', 76 )
 boca.animations.idle.configura(0)
 boca.animations.idle.turnOn()
 
@@ -260,13 +260,13 @@ boca.movimentacao_senoidal.espaco_angular = 0
 maguinho = Personagem()
 
 maguinho.current_animation = maguinho.animations.idle
-maguinho.current_animation.set( 'characters\\boca\\idle-fly') #( 'characters\\boca\\flutuando' ) #pequeno mago\idle' )
+maguinho.current_animation.set( 'characters\\boca\\flutuando', 76 ) #( 'characters\\boca\\flutuando' ) #pequeno mago\idle' )
 maguinho.current_animation.configura(0)
 maguinho.current_animation.turnOn()
 
-maguinho.animations.walking.set( 'characters\\boca\\walk-fly' )
-maguinho.animations.walking.configura(0)
-maguinho.animations.walking.turnOn()
+#maguinho.animations.walking.set( 'characters\\boca\\walk-fly' )
+#maguinho.animations.walking.configura(0)
+#maguinho.animations.walking.turnOn()
 
 
 maguinho.fisica.afetado_por_gravidade = False
