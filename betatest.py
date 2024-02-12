@@ -1,4 +1,4 @@
-from personagem import murasaki, drexa, arquimago, cyber, maguinho, logan
+from personagem import samurai, murasaki, drexa, arquimago, cyber, maguinho, logan
 from renderiza import *
 from moving_functions import *
 from functools import partial
@@ -13,6 +13,7 @@ objetos.boca.funcoes.append( movimentacao_automatica_senoidal )
 
 imagem_coracao = pygame.image.load( "efeitos\\coracao.png" )
 
+samurai.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
 murasaki.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
 drexa.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta)
 cyber.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
@@ -22,6 +23,7 @@ maguinho.modo_de_controle = ( controle_voo, 8, desaceleracao_aerea )
 
     # salto base
     # mulplicador de velocidade
+#samurai. multiplicadores_de_salto = (-28, 1  )
 murasaki.multiplicadores_de_salto = (-28, 1  )
 drexa.   multiplicadores_de_salto = (-30, 1.5)
 cyber.   multiplicadores_de_salto = (-30, 0  )
@@ -29,6 +31,7 @@ logan.   multiplicadores_de_salto = (-28, 1  )
 
     # velocidade minima de ativação
     # multiplicador de velocidade adicional
+#samurai. multiplicadores_de_velocidade = (12, {False: 1, True:1  })
 murasaki.multiplicadores_de_velocidade = (12, {False: 1, True:1  })
 drexa.   multiplicadores_de_velocidade = (12, {False: 1, True:1  })
 cyber.   multiplicadores_de_velocidade = ( 4, {False: 1, True:-2 })
@@ -44,10 +47,11 @@ def movimentacao_padrao( character, atividade:int ):
     (controle_adequado_passivo, controle_adequado_efetivo1, controle_adequado_efetivo2)[atividade](character)
 
 root_funcoes =       [gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
-murasaki.funcoes +=  root_funcoes #[gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
-drexa.funcoes +=     root_funcoes #[gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
+samurai.funcoes +=   root_funcoes
+murasaki.funcoes +=  root_funcoes
+drexa.funcoes +=     root_funcoes
 arquimago.funcoes += [gravidade, colisao_com_plataformas]
-cyber.funcoes +=     root_funcoes #[gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
+cyber.funcoes +=     root_funcoes
 maguinho.funcoes +=  [gravidade, colisao_com_plataformas]
 logan.funcoes +=     root_funcoes
 

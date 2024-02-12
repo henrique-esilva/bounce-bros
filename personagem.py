@@ -51,6 +51,8 @@ class Personagem():
 		self.funcoes = []
 
 		self.modo_de_controle = ( None, None )
+		self.multiplicadores_de_salto = (-28, 1  )
+		self.multiplicadores_de_velocidade = (12, {False: 1, True:1  })
 
 		# temporario
 		#self.running_sound = pygame.mixer.Sound(file='sound\effects\walky/ocarina.wav')
@@ -121,26 +123,6 @@ class Personagem():
 
 		for i in self.funcoes:
 			i( self )
-
-
-
-'''
-class Fisica():
-	def __init__(self):
-		self.velocidade_lateral = 0
-		self.velocidade_de_queda = 0
-		self.afetado_por_gravidade = True
-
-		self.velocidade_de_rotacao = 0
-		self.angulo_de_rotacao = 0
-
-		self.retangulo_do_corpo = pygame.Rect( 0, 0, 36, 77 )
-
-		# O retangulo da cabeça deve ficar 57px acima da borda inferior do retangulo principal
-		self.retangulo_da_cabeca = pygame.Rect( 0, 0, 36, 17 )
-
-		self.retangulo_dos_pes = pygame.Rect( 0, 0, 36, 30 )
-'''
 
 
 
@@ -287,4 +269,33 @@ cyber.rect = cyber.animations.idle.content[0].get_rect()
 cyber.current_animation.turnOn()
 cyber.rect.left = 250
 
-personagens = [ murasaki, drexa, logan, cyber, arquimago, maguinho ]
+
+
+samurai = Personagem()
+
+samurai.animations.idle.set( 'characters//samurai//idle' )
+samurai.animations.idle.configura(0)
+samurai.animations.idle.turnOn()
+
+samurai.current_animation = samurai.animations.idle
+
+samurai.animations.walking.set( 'characters//samurai//run' )
+samurai.animations.walking.configura(0)
+samurai.animations.walking.turnOn()
+
+'''samurai.animations.fast_walking = Animation()
+samurai.animations.fast_walking.set( 'characters//samurai//andando', 23 )
+samurai.animations.fast_walking.configura(0)
+samurai.animations.fast_walking.turnOn()'''
+
+#samurai.animations.breaking.set( 'characters//murasaki//andando', 59 )
+#samurai.animations.breaking.configura(0)
+#samurai.animations.breaking.turnOn()
+
+samurai.rect = samurai.current_animation.content[0].get_rect()
+
+
+
+
+
+personagens = [ samurai, murasaki, drexa, logan, cyber, arquimago, maguinho ]
