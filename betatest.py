@@ -23,7 +23,6 @@ maguinho.modo_de_controle = ( controle_voo, 8, desaceleracao_aerea )
 
     # salto base
     # mulplicador de velocidade
-#samurai. multiplicadores_de_salto = (-28, 1  )
 murasaki.multiplicadores_de_salto = (-28, 1  )
 drexa.   multiplicadores_de_salto = (-30, 1.5)
 cyber.   multiplicadores_de_salto = (-30, 0  )
@@ -31,7 +30,6 @@ logan.   multiplicadores_de_salto = (-28, 1  )
 
     # velocidade minima de ativação
     # multiplicador de velocidade adicional
-#samurai. multiplicadores_de_velocidade = (12, {False: 1, True:1  })
 murasaki.multiplicadores_de_velocidade = (12, {False: 1, True:1  })
 drexa.   multiplicadores_de_velocidade = (12, {False: 1, True:1  })
 cyber.   multiplicadores_de_velocidade = ( 4, {False: 1, True:-2 })
