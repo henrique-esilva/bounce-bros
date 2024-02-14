@@ -1,4 +1,10 @@
-This project makes use of a few resources, that are listed below. Very thanks to all involved in your creation.
 Este projeto faz uso de alguns recursos, que são listados abaixo. Muito obrigado aos envolvidos em sua criação.
+This project makes use of a few resources, that are listed below. Very thanks to all involved in your making.
+
+## FREE SHINOBI SPRITES PIXEL ART
 
 https://craftpix.net/freebies/free-shinobi-sprites-pixel-art/
+
+Dê uma olhada na licença em
+Take a look in license at
+https://craftpix.net/file-licenses/
