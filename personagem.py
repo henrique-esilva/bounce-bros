@@ -39,6 +39,7 @@ class Personagem():
 
 		self.vidas = 5
 		self.fisica = Fisica()
+		self.fisica.coeficiente_de_rotacao = 2
 		self.left = False
 
 
@@ -271,6 +272,7 @@ cyber.rect.left = 250
 
 
 
+'''
 samurai = Personagem()
 
 samurai.animations.idle.set( 'characters//samurai//idle' )
@@ -283,19 +285,19 @@ samurai.animations.walking.set( 'characters//samurai//run' )
 samurai.animations.walking.configura(0)
 samurai.animations.walking.turnOn()
 
-'''samurai.animations.fast_walking = Animation()
-samurai.animations.fast_walking.set( 'characters//samurai//andando', 23 )
-samurai.animations.fast_walking.configura(0)
-samurai.animations.fast_walking.turnOn()'''
+#samurai.animations.fast_walking = Animation()
+#samurai.animations.fast_walking.set( 'characters//samurai//andando', 23 )
+#samurai.animations.fast_walking.configura(0)
+#samurai.animations.fast_walking.turnOn()
 
 #samurai.animations.breaking.set( 'characters//murasaki//andando', 59 )
 #samurai.animations.breaking.configura(0)
 #samurai.animations.breaking.turnOn()
 
 samurai.rect = samurai.current_animation.content[0].get_rect()
+'''
 
 
 
 
-
-personagens = [ samurai, murasaki, drexa, logan, cyber, arquimago, maguinho ]
+personagens = [ murasaki, drexa, logan, cyber, arquimago, maguinho ]

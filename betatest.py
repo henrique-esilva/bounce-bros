@@ -1,4 +1,4 @@
-from personagem import samurai, murasaki, drexa, arquimago, cyber, maguinho, logan
+from personagem import murasaki, drexa, arquimago, cyber, maguinho, logan
 from renderiza import *
 from moving_functions import *
 from functools import partial
@@ -13,7 +13,6 @@ objetos.boca.funcoes.append( movimentacao_automatica_senoidal )
 
 imagem_coracao = pygame.image.load( "efeitos\\coracao.png" )
 
-samurai.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
 murasaki.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
 drexa.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta)
 cyber.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
@@ -45,7 +44,6 @@ def movimentacao_padrao( character, atividade:int ):
     (controle_adequado_passivo, controle_adequado_efetivo1, controle_adequado_efetivo2)[atividade](character)
 
 root_funcoes =       [gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
-samurai.funcoes +=   root_funcoes
 murasaki.funcoes +=  root_funcoes
 drexa.funcoes +=     root_funcoes
 arquimago.funcoes += [gravidade, colisao_com_plataformas]
@@ -135,7 +133,7 @@ def main():
     global indice_player
     global player
 
-    pygame.time.Clock().tick(30)#40)
+    pygame.time.Clock().tick(40)#40)
 
     alternancia_personagem()
     gambiarra_espada()
@@ -175,7 +173,8 @@ def main():
     remove_personagem(indice_player)
 
     for i in range(len(tileset_array)):
-        renderiza_tilesetpack( tileset_array[i], pre_tela, rel_p1, tamanho_dos_tiles )
-    #renderiza_tiles( objetos.plataformas, mini_tela, rel_p2 )
+        renderiza_quadrados( tileset_array[i][1], pre_tela, rel_p1 )
+    #    renderiza_tilesetpack( tileset_array[i], pre_tela, rel_p1, tamanho_dos_tiles )
+
     desenha_coracoes()
     renderiza_tela()

@@ -5,7 +5,7 @@ block_cipher = None
 
 
 a = Analysis(
-    ['launcher.py'],
+    ['main.py'],
     pathex=[],
     binaries=[],
     datas=[("characters", "characters"),("efeitos", "efeitos"), ("sound", "sound"), ("tiles", "tiles")],
@@ -28,7 +28,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='launcher',
+    name='main',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

@@ -20,7 +20,7 @@ mini_tela = pygame.Surface( (pre_size[0]/2,pre_size[1]) )
 
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 
-pygame.display.set_caption(" Jump Tales =^-^= ")
+pygame.display.set_caption(" Jump Tales ")
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 
 flags = pygame.SCALED
@@ -48,7 +48,7 @@ def renderiza_inversao_giro( a, superficie=pre_tela, rel_coord=(0, 0) ):
 
 def renderiza_personagem( a, superficie=pre_tela, rel_coord=(0, 0) ):
     imagem = pygame.transform.flip( a.current_animation.retorna_quadro(), a.left, 0 )
-    #imagem = pygame.transform.rotate( imagem, a.fisica.angulo_de_rotacao )
+    imagem = pygame.transform.rotate( imagem, a.fisica.angulo_de_rotacao )
     rect = imagem.get_rect()
     rect.center = a.rect.center
     impressao_de_imagem( superficie, imagem , rect, rel_coord )
@@ -70,17 +70,15 @@ def renderiza_tiles( vetor, image, superficie=pre_tela, rel_coord=(0,0)):
         superficie.blit(image, j)
 
 
-# def renderiza_tiles( vetor, superficie=pre_tela, rel_coord=(0,0) ):
-#     for i in vetor:
-#         j=Rect(i)
-#         j.move_ip(rel_coord)
-#         pygame.draw.rect( superficie, color.colorDarkGrey, j, width = 0 )
+def renderiza_quadrados( vetor, superficie=pre_tela, rel_coord=(0,0) ):
+    for i in vetor:
+        j=Rect(i[0]*96, i[1]*96, 96, 96)
+        j.move_ip(rel_coord)
+        pygame.draw.rect( superficie, color.colorDarkGrey, j, width = 0 )
 
 
 def renderiza_tilesetpack(tilesetpack, superficie, rel_coord, tam):
     for i in tilesetpack[1]:
-        #j=Rect(i)
-        #j.move_ip(rel_coord)
         superficie.blit(tilesetpack[0], (i[0]*tam[0]+rel_coord[0], i[1]*tam[1]+rel_coord[1]))
 
 

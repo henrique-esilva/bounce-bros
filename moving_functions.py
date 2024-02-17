@@ -225,7 +225,7 @@ def gatilho_islanded_delme(obj):
 def efeito_de_giro( kk ):
     if is_landed( kk ):
         kk.fisica.angulo_de_rotacao = 0
-        #kk.fisica.velocidade_de_rotacao = -kk.fisica.velocidade_lateral
+        # kk.fisica.velocidade_de_rotacao = -kk.fisica.velocidade_lateral
     else:
         kk.fisica.velocidade_de_rotacao = -kk.fisica.velocidade_lateral
         kk.fisica.angulo_de_rotacao += kk.fisica.velocidade_de_rotacao * kk.fisica.coeficiente_de_rotacao
