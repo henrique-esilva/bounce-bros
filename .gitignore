@@ -1,7 +1,5 @@
-build
-build/**
-dist
-dist/**
+**/build
+**/dist
 **/__pycache__
 **/.vscode
 **.kra~
