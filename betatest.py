@@ -173,7 +173,7 @@ def main():
     remove_personagem(indice_player)
 
     for i in range(len(tileset_array)):
-        renderiza_quadrados( tileset_array[i][1], pre_tela, rel_p1 )
+        renderiza_quadrados( tileset_array[i][1], tamanho_dos_tiles, pre_tela, rel_p1 )
     #    renderiza_tilesetpack( tileset_array[i], pre_tela, rel_p1, tamanho_dos_tiles )
 
     desenha_coracoes()

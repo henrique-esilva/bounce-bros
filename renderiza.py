@@ -70,9 +70,9 @@ def renderiza_tiles( vetor, image, superficie=pre_tela, rel_coord=(0,0)):
         superficie.blit(image, j)
 
 
-def renderiza_quadrados( vetor, superficie=pre_tela, rel_coord=(0,0) ):
+def renderiza_quadrados( vetor, tam, superficie=pre_tela, rel_coord=(0,0) ):
     for i in vetor:
-        j=Rect(i[0]*96, i[1]*96, 96, 96)
+        j=Rect(i[0]*tam[0], i[1]*tam[1], tam[0], tam[1])
         j.move_ip(rel_coord)
         pygame.draw.rect( superficie, color.colorDarkGrey, j, width = 0 )
 
