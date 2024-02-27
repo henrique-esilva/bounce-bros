@@ -1,7 +1,8 @@
-**/build
-**/dist
-**/__pycache__
-**/.vscode
-**.kra~
+**/build 
+**/dist 
+**/__pycache__ 
+**/.vscode 
+**.kra~ 
+**.kra~~ 
 cmd.exe.lnk
 launcher.spec
