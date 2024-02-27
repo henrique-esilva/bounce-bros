@@ -4,5 +4,7 @@
 **/.vscode 
 **.kra~ 
 **.kra~~ 
+**/.kra~ 
+**/.kra~~ 
 cmd.exe.lnk
 launcher.spec
