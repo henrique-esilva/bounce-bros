@@ -197,7 +197,8 @@ arquimago.current_animation.configura(0)
 arquimago.current_animation.turnOn()
 
 arquimago.rect = arquimago.current_animation.content[0].get_rect()
-arquimago.rect.left = 300
+arquimago.rect.centerx = 96*5.5
+arquimago.rect.centery = 96*3.5
 arquimago.fisica.afetado_por_gravidade = False
 
 
@@ -254,8 +255,8 @@ maguinho.current_animation.turnOn()
 
 maguinho.fisica.afetado_por_gravidade = False
 maguinho.rect = maguinho.animations.idle.content[0].get_rect()
-maguinho.rect.left = 400
-maguinho.rect.bottom = 100
+maguinho.rect.centerx = 96*4.5
+maguinho.rect.centery = 96*3.5
 
 cyber = Personagem()
 cyber.current_animation = cyber.animations.idle
