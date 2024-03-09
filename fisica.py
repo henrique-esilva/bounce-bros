@@ -10,9 +10,9 @@ class Fisica():
 		self.velocidade_de_rotacao = 0
 		self.angulo_de_rotacao = 0
 
-		self.retangulo_do_corpo = pygame.Rect( 0, 0, 36, 77 )
+		self.retangulo_do_corpo = pygame.Rect( 0, 0, 25, 77 ) # width 36
 
 		# O retangulo da cabeça deve ficar 57px acima da borda inferior do retangulo principal
-		self.retangulo_da_cabeca = pygame.Rect( 0, 0, 36, 17 )
+		self.retangulo_da_cabeca = pygame.Rect( 0, 0, 25, 17 )
 
-		self.retangulo_dos_pes = pygame.Rect( 0, 0, 36, 30 )
+		self.retangulo_dos_pes = pygame.Rect( 0, 0, 25, 30 )
