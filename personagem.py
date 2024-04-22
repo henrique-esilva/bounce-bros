@@ -7,6 +7,13 @@ from fisica import Fisica
 pygame.mixer.init()
 
 
+class PerseguicaoLocal():
+	def __init__( self, rect:pygame.Rect, alvos:list, velocidade:int=4 ):
+		self.rect = rect
+		self.alvos = alvos
+		self.velocidade = velocidade
+
+
 class Movimentacao_cossenoidal():
 	def __init__( self , posicao_referencial ):
 		# unidade de medida de espaço angular = pi * radianos
@@ -160,6 +167,8 @@ def murasaki_animation_extra_adjust( blabla:any ):
 		murasaki.current_animation = murasaki.animations.fast_walking
 #murasaki.funcoes.insert( 1, murasaki_animation_extra_adjust )
 
+
+
 drexa = Personagem()
 
 drexa.current_animation = drexa.animations.idle
@@ -227,6 +236,25 @@ monstrinho.rect.left = 1000
 monstrinho.fisica.retangulo_do_corpo.width = 30
 
 
+
+#######################################################################
+monstrinho2 = Personagem()
+
+monstrinho2.perseguicao_local = PerseguicaoLocal(Rect(0,0,96*4,96*4), [])
+
+monstrinho2.current_animation = monstrinho2.animations.idle
+monstrinho2.current_animation.set( 'characters//boca//flutuando', 76 )
+monstrinho2.current_animation.configura(0)
+monstrinho2.current_animation.turnOn()
+
+monstrinho2.rect.top = 0
+monstrinho2.rect.left = 96*5
+monstrinho2.fisica.retangulo_do_corpo.width = 30
+
+
+
+
+
 boca=Personagem()
 boca.animations.idle.set( 'characters\\boca\\flutuando', 76 )
 boca.animations.idle.configura(0)
@@ -241,6 +269,7 @@ boca.movimentacao_senoidal.set_amplitude( 96 )
 boca.movimentacao_senoidal.espaco_angular = 0
 
 
+
 maguinho = Personagem()
 
 maguinho.current_animation = maguinho.animations.idle
@@ -252,11 +281,12 @@ maguinho.current_animation.turnOn()
 #maguinho.animations.walking.configura(0)
 #maguinho.animations.walking.turnOn()
 
-
 maguinho.fisica.afetado_por_gravidade = False
 maguinho.rect = maguinho.animations.idle.content[0].get_rect()
 maguinho.rect.centerx = 96*4.5
 maguinho.rect.centery = 96*3.5
+
+
 
 cyber = Personagem()
 cyber.current_animation = cyber.animations.idle

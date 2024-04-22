@@ -1,4 +1,4 @@
-from personagem import personagens as lista_personagens, monstrinho, boca
+from personagem import personagens as lista_personagens, monstrinho, monstrinho2, boca
 from tileset import plataformas
 import efeitos_visuais
 
@@ -6,7 +6,7 @@ from obj_moveis import EspadaVoadora
 
 
 personagens = lista_personagens
-fantasminhas = [ monstrinho, boca ]
+fantasminhas = [ monstrinho, boca, monstrinho2 ]
 particulas = []
 obj_moveis = []
 plataformas = plataformas

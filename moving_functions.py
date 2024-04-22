@@ -98,8 +98,8 @@ def colisao_com_plataformas( personagem, vetor_plataformas = objetos.plataformas
             ):
 
                 personagem.rect.bottom = plataforma.top + 1
-                personagem.fisica.velocidade_de_rotacao = 0
-                personagem.fisica.angulo_de_rotacao     = 0
+                #personagem.fisica.velocidade_de_rotacao = 0
+                #personagem.fisica.angulo_de_rotacao     = 0
                 personagem.fisica.velocidade_de_queda   = 0
 
             elif ( personagem.fisica.velocidade_de_queda < 0 and 
@@ -225,7 +225,6 @@ def gatilho_islanded_delme(obj):
 def efeito_de_giro( kk ):
     if is_landed( kk ):
         kk.fisica.angulo_de_rotacao = 0
-        # kk.fisica.velocidade_de_rotacao = -kk.fisica.velocidade_lateral
     else:
         kk.fisica.velocidade_de_rotacao = -kk.fisica.velocidade_lateral
         kk.fisica.angulo_de_rotacao += kk.fisica.velocidade_de_rotacao * kk.fisica.coeficiente_de_rotacao
@@ -291,7 +290,7 @@ def controle_lateral_pula ( kk , key_set, limite = 30 ):
             objetos.particulas.append( efeitos_visuais.ObjetoEfemero( [ kk.rect.centerx, kk.rect.bottom ] ) )
                 # at least 30 is requiered to jump a plataform
             kk.fisica.velocidade_de_queda = kk.multiplicadores_de_salto[0] - math.copysign( kk.fisica.velocidade_lateral, 1 ) * kk.multiplicadores_de_salto[1]
-            #if kk.fisica.velocidade_lateral >= kk.multiplicadores_de_velocidade[0]:
+
             kk.fisica.velocidade_lateral = kk.fisica.velocidade_lateral * kk.multiplicadores_de_velocidade[1][math.copysign(kk.fisica.velocidade_lateral,1) >= kk.multiplicadores_de_velocidade[0]]
 
     if tecla[key_set[0]]:
@@ -476,3 +475,30 @@ def movimentacao_automatica_senoidal( coisa ):
 
     coisa.rect.centery += coisa.fisica.velocidade_de_queda
     coisa.ajusta_retangulos()
+
+
+def perseguir_localmente( coisa ):
+    try:
+        pur = coisa.perseguicao_local
+    except AttributeError:
+        print("ATENÇÃO: classe tentando usar perseguir_localmente() sem ter a subclasse personagem.PerseguicaoLocal\n\
+              com o nome perseguicao_local")
+
+    perseguindo = False
+
+    for i in pur.alvos:
+        if i.rect.colliderect(pur.rect):
+            perseguindo = i
+            break
+
+    if perseguindo:
+        if perseguindo.rect.center != coisa.rect.center:
+            diffx = perseguindo.rect.centerx - coisa.rect.centerx
+            diffy = perseguindo.rect.centery - coisa.rect.centery
+            a = math.sqrt(diffx**2 + diffy**2)
+            cos = diffx/a
+            sin = diffy/a
+            coisa.rect.move_ip(cos*pur.velocidade, sin*pur.velocidade)
+            coisa.left = cos<0
+
+    else: return

@@ -1,13 +1,16 @@
 from personagem import murasaki, drexa, arquimago, cyber, maguinho, logan
 from renderiza import *
 from moving_functions import *
-from functools import partial
-from math import copysign as cs
+#from functools import partial
+#from math import copysign as cs
 from random import randint
 import objetos
 from tileset import array as tileset_array, tamanho_dos_tiles
 
 objetos.monstrinho.funcoes.append( movimentacao_automatica_senoidal )
+objetos.monstrinho2.funcoes.append( perseguir_localmente )
+objetos.monstrinho2.funcoes.append( colisao_com_plataformas )
+objetos.monstrinho2.perseguicao_local.alvos = objetos.personagens
 #objetos.monstrinho.funcoes.append( movimentacao_automatica_cossenoidal )
 objetos.boca.funcoes.append( movimentacao_automatica_senoidal )
 
@@ -27,7 +30,7 @@ drexa.   multiplicadores_de_salto = (-29, 1.5)
 cyber.   multiplicadores_de_salto = (-29, 0  )
 logan.   multiplicadores_de_salto = (-29, 1  )
 
-    # velocidade minima de ativação
+    # velocidade minima de ativacao
     # multiplicador de velocidade adicional
 murasaki.multiplicadores_de_velocidade = (12, {False: 1, True:1  })
 drexa.   multiplicadores_de_velocidade = (12, {False: 1, True:1  })
@@ -144,15 +147,18 @@ def main():
     for character in objetos.personagens:
         movimentacao_padrao(character, int(character==player)) #+2*int(character==player2))
 
+    rel_p1 = (get_rel_char(player ))
+
     for i in objetos.fantasminhas + objetos.personagens:
         i.current_animation.run()#i.fisica.velocidade_lateral )
         i.run()
+        renderiza_personagem( i, pre_tela, rel_p1 )
 
-    rel_p1 = (get_rel_char(player ))#[0]-pre_size[0]/4, get_rel_char(player )[1])
+    #rel_p1 = (get_rel_char(player ))#[0]-pre_size[0]/4, get_rel_char(player )[1])
     #rel_p2 = (get_rel_char(player2)[0]-pre_size[0]/4, get_rel_char(player2)[1])
 
-    for i in objetos.fantasminhas + objetos.personagens:
-        renderiza_personagem( i, pre_tela, rel_p1 )
+    #for i in objetos.fantasminhas + objetos.personagens:
+    #    renderiza_personagem( i, pre_tela, rel_p1 )
         #renderiza_personagem( i, mini_tela, rel_p2 )
 
     for i in objetos.obj_moveis:
