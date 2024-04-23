@@ -1,7 +1,7 @@
 import pygame, sys
 from pygame.locals import *
 
-from animation import *
+from animation2 import *
 from fisica import Fisica
 
 pygame.mixer.init()
@@ -141,18 +141,19 @@ murasaki.animations.idle.set( 'characters//murasaki//idle', 26)
 murasaki.animations.idle.configura(0)
 murasaki.animations.idle.turnOn()
 
-murasaki.current_animation = murasaki.animations.idle
+murasaki.animations.current = murasaki.animations.idle
 
 murasaki.animations.walking.set( 'characters//murasaki//andando-lento', 9 )
 murasaki.animations.walking.configura(0)
 murasaki.animations.walking.turnOn()
 
 murasaki.animations.fast_walking = Animation()
+murasaki.animations.db['fast_walking'] = murasaki.animations.fast_walking
 murasaki.animations.fast_walking.set( 'characters//murasaki//andando', 23 )
 murasaki.animations.fast_walking.configura(0)
 murasaki.animations.fast_walking.turnOn()
 
-murasaki.animations.breaking.set( 'characters//murasaki//andando', 59 )
+murasaki.animations.breaking.set( 'characters//murasaki//freio', 59 )
 murasaki.animations.breaking.configura(0)
 murasaki.animations.breaking.turnOn()
 
@@ -171,18 +172,16 @@ def murasaki_animation_extra_adjust( blabla:any ):
 
 drexa = Personagem()
 
-drexa.current_animation = drexa.animations.idle
-drexa.current_animation.set( 'characters//drexa//new//idle', 32, 63 )
-drexa.current_animation.configura(0)
-drexa.current_animation.turnOn()
+drexa.animations.current = drexa.animations.idle
+drexa.animations.idle.set( 'characters//drexa//new//idle', 32, 63 )
+drexa.animations.idle.configura(0)
+drexa.animations.idle.turnOn()
 
+drexa.animations.walking.set( 'characters//drexa//new//walk', 24 )
+drexa.animations.walking.configura(0)
+drexa.animations.walking.turnOn()
 
-drexa.current_animation = drexa.animations.walking
-drexa.current_animation.set( 'characters//drexa//new//walk', 24 )
-drexa.current_animation.configura(0)
-drexa.current_animation.turnOn()
-
-drexa.rect = drexa.current_animation.content[0].get_rect()
+drexa.rect = drexa.animations.current.content[0].get_rect()
 drexa.rect.left = 300
 
 
@@ -195,17 +194,17 @@ logan.animations.walking.set( 'characters//drexa//logan//walk' )
 logan.animations.walking.configura(0)
 logan.animations.walking.turnOn()
 
-logan.rect=logan.current_animation.content[0].get_rect()
+logan.rect=logan.animations.current.content[0].get_rect()
 logan.rect.left=180
 
 
 arquimago = Personagem()
-arquimago.current_animation = arquimago.animations.idle
-arquimago.current_animation.set( 'characters\\arquimago\idle' )
-arquimago.current_animation.configura(0)
-arquimago.current_animation.turnOn()
+arquimago.animations.current = arquimago.animations.idle
+arquimago.animations.idle.set( 'characters\\arquimago\idle' )
+arquimago.animations.idle.configura(0)
+arquimago.animations.idle.turnOn()
 
-arquimago.rect = arquimago.current_animation.content[0].get_rect()
+arquimago.rect = arquimago.animations.current.content[0].get_rect()
 arquimago.rect.centerx = 96*5.5
 arquimago.rect.centery = 96*3.5
 arquimago.fisica.afetado_por_gravidade = False
@@ -221,10 +220,10 @@ monstrinho.movimentacao_senoidal.set_frequencia( 0.4 )
 monstrinho.movimentacao_senoidal.set_amplitude( 96 )
 monstrinho.movimentacao_senoidal.espaco_angular = 0
 
-monstrinho.current_animation = monstrinho.animations.idle
-monstrinho.current_animation.set( 'characters//boca//flutuando', 76 ) # 'characters\\boca\idle-fly' ) #pequeno mago\idle' )
-monstrinho.current_animation.configura(0)
-monstrinho.current_animation.turnOn()
+monstrinho.animations.current = monstrinho.animations.idle
+monstrinho.animations.idle.set( 'characters//boca//flutuando', 76 ) # 'characters\\boca\idle-fly' ) #pequeno mago\idle' )
+monstrinho.animations.idle.configura(0)
+monstrinho.animations.idle.turnOn()
 
 #monstrinho.animations.walking.set( 'characters\\boca\\flutuando', 76 ) #pequeno mago\idle' )
 #monstrinho.animations.walking.configura(0)
@@ -242,10 +241,10 @@ monstrinho2 = Personagem()
 
 monstrinho2.perseguicao_local = PerseguicaoLocal(Rect(0,0,96*4,96*4), [])
 
-monstrinho2.current_animation = monstrinho2.animations.idle
-monstrinho2.current_animation.set( 'characters//boca//flutuando', 76 )
-monstrinho2.current_animation.configura(0)
-monstrinho2.current_animation.turnOn()
+monstrinho2.animations.current = monstrinho2.animations.idle
+monstrinho2.animations.idle.set( 'characters//boca//flutuando', 76 )
+monstrinho2.animations.idle.configura(0)
+monstrinho2.animations.idle.turnOn()
 
 monstrinho2.rect.top = 0
 monstrinho2.rect.left = 96*5
@@ -272,10 +271,9 @@ boca.movimentacao_senoidal.espaco_angular = 0
 
 maguinho = Personagem()
 
-maguinho.current_animation = maguinho.animations.idle
-maguinho.current_animation.set( 'characters\\boca\\flutuando', 76 ) #( 'characters\\boca\\flutuando' ) #pequeno mago\idle' )
-maguinho.current_animation.configura(0)
-maguinho.current_animation.turnOn()
+maguinho.animations.idle.set( 'characters\\boca\\flutuando', 76 ) #( 'characters\\boca\\flutuando' ) #pequeno mago\idle' )
+maguinho.animations.idle.configura(0)
+maguinho.animations.idle.turnOn()
 
 #maguinho.animations.walking.set( 'characters\\boca\\walk-fly' )
 #maguinho.animations.walking.configura(0)
@@ -289,16 +287,16 @@ maguinho.rect.centery = 96*3.5
 
 
 cyber = Personagem()
-cyber.current_animation = cyber.animations.idle
-cyber.current_animation.set( 'characters\\cyber\\walking' )
-cyber.current_animation.content = cyber.animations.idle.content[:1]
-cyber.current_animation.configura(0)
-cyber.current_animation.turnOn()
-cyber.current_animation = cyber.animations.walking
-cyber.current_animation.set( 'characters\\cyber\\walking', 1 )
-cyber.current_animation.configura(1)
+cyber.animations.current = cyber.animations.idle
+cyber.animations.current.set( 'characters\\cyber\\walking' )
+cyber.animations.current.content = cyber.animations.idle.content[:1]
+cyber.animations.current.configura(0)
+cyber.animations.current.turnOn()
+cyber.animations.current = cyber.animations.walking
+cyber.animations.current.set( 'characters\\cyber\\walking', 1 )
+cyber.animations.current.configura(1)
 cyber.rect = cyber.animations.idle.content[0].get_rect()
-cyber.current_animation.turnOn()
+cyber.animations.current.turnOn()
 cyber.rect.left = 250
 
 

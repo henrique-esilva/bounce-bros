@@ -9,9 +9,8 @@ from tileset import array as tileset_array, tamanho_dos_tiles
 
 objetos.monstrinho.funcoes.append( movimentacao_automatica_senoidal )
 objetos.monstrinho2.funcoes.append( perseguir_localmente )
-objetos.monstrinho2.funcoes.append( colisao_com_plataformas )
+#objetos.monstrinho2.funcoes.append( colisao_com_plataformas )
 objetos.monstrinho2.perseguicao_local.alvos = objetos.personagens
-#objetos.monstrinho.funcoes.append( movimentacao_automatica_cossenoidal )
 objetos.boca.funcoes.append( movimentacao_automatica_senoidal )
 
 imagem_coracao = pygame.image.load( "efeitos\\coracao.png" )
