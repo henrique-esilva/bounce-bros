@@ -72,7 +72,7 @@ class Animation():
 		# a ideia aqui era a de atribuir um caminho (path) para cada animacao, o caminho seria salvo num banco de
 		# imagens junto com o conteudo da animacao. Caso o path nao esteja no banco, a classe deve incluir no ban
 		# co, o path como sendo uma chave, apontando para o conteudo da animacao, como sendo um valor. Caso o pat
-		# h ja estja no banco, a classe apenas aponta o seu content para o valor do path no banco.
+		# h ja esteja no banco, a classe apenas aponta o seu content para o valor do path no banco.
 		# Deste modo, todas as animacoes com o mesmo path terao o mesmo conteudo, sem repeticao na memoria
 
 		self.path = path
