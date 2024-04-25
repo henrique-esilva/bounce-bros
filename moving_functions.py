@@ -174,7 +174,7 @@ def rebate( kk:__build_class__ ):
     if kk.fisica.velocidade_de_queda > 0:
         for i in objetos.personagens + objetos.fantasminhas:
             if i != kk:
-                if kk.fisica.retangulo_dos_pes.colliderect( i.fisica.retangulo_da_cabeca ) and kk.fisica.retangulo_dos_pes.bottom - kk.fisica.velocidade_de_queda < i.fisica.retangulo_da_cabeca.top:
+                if kk.fisica.retangulo_dos_pes.colliderect( i.fisica.retangulo_da_cabeca ):
 
                     kk.rect.bottom = i.fisica.retangulo_da_cabeca.top
                     kk.ajusta_retangulos()
@@ -192,7 +192,7 @@ def rebate( kk:__build_class__ ):
 
                         #inverte a velocidade de queda para dar o efeito de impulso
                     i.fisica.velocidade_de_queda = (-i.fisica.velocidade_de_queda + velocidade_do_kk, 0)[int(is_landed(i))]
-                    i.vidas -= 1
+                    #i.vidas -= 1
                     break
 
 def is_landed( coisa ):

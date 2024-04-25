@@ -138,7 +138,7 @@ def main():
     pygame.time.Clock().tick(40)#40)
 
     alternancia_personagem()
-    gambiarra_espada()
+    #gambiarra_espada()
 
     player = objetos.personagens[ indice_player ]
     #player2 = objetos.personagens[ indice_player-1 ]

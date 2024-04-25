@@ -183,6 +183,7 @@ drexa.animations.walking.turnOn()
 
 drexa.rect = drexa.animations.current.content[0].get_rect()
 drexa.rect.left = 300
+drexa.fisica.coeficiente_de_rotacao = 2.5
 
 
 logan = Personagem()
