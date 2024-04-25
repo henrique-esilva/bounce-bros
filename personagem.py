@@ -74,7 +74,7 @@ class Personagem():
 		self.fisica.retangulo_do_corpo.centerx = self.rect.centerx
 
 		# ajustando o retangulo de colisão da cabeça da personagem
-		self.fisica.retangulo_da_cabeca.bottom = self.rect.bottom - 57
+		self.fisica.retangulo_da_cabeca.top = self.fisica.retangulo_do_corpo.top# self.rect.bottom - 57
 		self.fisica.retangulo_da_cabeca.centerx = self.rect.centerx
 
 		# ajustando o retangulo de colisão dos pés da personagem
@@ -302,6 +302,17 @@ cyber.rect.left = 250
 
 
 
+mandy = Personagem()
+mandy.animations.idle.set("characters\\mandy\\idle")
+mandy.animations.idle.turnOn()
+mandy.animations.walking.set("characters\\mandy\\walk")
+mandy.animations.walking.turnOn()
+mandy.rect = mandy.animations.idle.content[0].get_rect()
+mandy.fisica.retangulo_do_corpo = Rect( 0, 0, 25, 69 )
+mandy.rect.center = (96*9.5, 96*3.5)
+
+
+
 '''
 samurai = Personagem()
 
@@ -330,4 +341,4 @@ samurai.rect = samurai.current_animation.content[0].get_rect()
 
 
 
-personagens = [ murasaki, drexa, logan, cyber, arquimago, maguinho ]
+personagens = [ murasaki, drexa, logan, mandy, cyber, arquimago, maguinho ]
