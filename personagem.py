@@ -310,6 +310,7 @@ mandy.animations.walking.turnOn()
 mandy.rect = mandy.animations.idle.content[0].get_rect()
 mandy.fisica.retangulo_do_corpo = Rect( 0, 0, 25, 69 )
 mandy.rect.center = (96*9.5, 96*3.5)
+mandy.fisica.coeficiente_de_rotacao = 3.5
 
 
 
