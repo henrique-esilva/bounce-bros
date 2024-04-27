@@ -19,7 +19,7 @@ murasaki.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_
 drexa.modo_de_controle = ( controle_lateral_pula, 6, desacelera_move_lateral_ajusta)
 cyber.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
 logan.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
-mandy.modo_de_controle = ( controle_lateral_pula, 10, desacelera_move_lateral_ajusta )
+mandy.modo_de_controle = ( controle_lateral_pula, 13, desacelera_move_lateral_ajusta )
 arquimago.modo_de_controle = ( controle_voo, 8, desaceleracao_aerea )
 maguinho.modo_de_controle = ( controle_voo, 8, desaceleracao_aerea )
 
@@ -29,7 +29,7 @@ murasaki.multiplicadores_de_salto = (-29, 1  )
 drexa.   multiplicadores_de_salto = (-29, 1.5)
 cyber.   multiplicadores_de_salto = (-29, 0  )
 logan.   multiplicadores_de_salto = (-29, 1  )
-mandy.   multiplicadores_de_salto = (-29, 1  )
+mandy.   multiplicadores_de_salto = (-29, 0.5)
 
     # velocidade minima de ativacao
     # multiplicador de velocidade adicional
@@ -37,7 +37,7 @@ murasaki.multiplicadores_de_velocidade = (12, {False: 1, True:1  })
 drexa.   multiplicadores_de_velocidade = (12, {False: 1, True:1  })
 cyber.   multiplicadores_de_velocidade = ( 4, {False: 1, True:1  })
 logan.   multiplicadores_de_velocidade = ( 8, {False: 1, True:2  })
-mandy.   multiplicadores_de_velocidade = ( 5, {False: 1, True:2  })
+mandy.   multiplicadores_de_velocidade = ( 5, {False: 1, True:1  })
 
 def controle_adequado_efetivo1( character ):
     character.modo_de_controle[0]( character, 0, character.modo_de_controle[1] )
