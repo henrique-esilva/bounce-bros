@@ -46,7 +46,7 @@ class Personagem():
 
 		self.vidas = 5
 		self.fisica = Fisica()
-		self.fisica.coeficiente_de_rotacao = 2
+		#self.fisica.coeficiente_de_rotacao = 2
 		self.left = False
 
 
@@ -162,6 +162,7 @@ murasaki.animations.breaking.turnOn()
 
 murasaki.rect = murasaki.animations.walking.content[0].get_rect()
 murasaki.rect.left = 0
+murasaki.fisica.coeficiente_de_rotacao = 2.1
 
 def murasaki_animation_extra_adjust( blabla:any ):
 	if math.copysign( murasaki.fisica.velocidade_lateral, 1 ) >= 10:
@@ -303,7 +304,7 @@ cyber.rect.left = 250
 
 
 mandy = Personagem()
-mandy.animations.idle.set("characters\\mandy\\idle")
+mandy.animations.idle.set("characters\\mandy\\new\\idle")
 mandy.animations.idle.turnOn()
 mandy.animations.walking.set("characters\\mandy\\walk")
 mandy.animations.walking.turnOn()
