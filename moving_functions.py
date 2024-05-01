@@ -275,6 +275,10 @@ def move_lateral_ajusta(kk):
 
 
 def controle_lateral_pula ( kk , key_set, limite = 30 ):
+    """
+    keyset 0 -> awd\n
+    keyset 1 -> <^>\n
+    limite -> velocidade maxima"""
 
     key_set = (
         (K_a, K_d, K_w),
