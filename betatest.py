@@ -15,6 +15,8 @@ objetos.boca.funcoes.append( movimentacao_automatica_senoidal )
 
 imagem_coracao = pygame.image.load( "efeitos\\coracao.png" )
 
+    # define conjunto de configuracao de controle ativo e passivo dos personagens
+    # assim: modo_de_controle = (funcao_de_controle_ativo, velocidade, funcao_de_controle_passivo)
 murasaki.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
 drexa.modo_de_controle = ( controle_lateral_pula, 6, desacelera_move_lateral_ajusta)
 cyber.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
@@ -40,13 +42,20 @@ logan.   multiplicadores_de_velocidade = ( 8, {False: 1, True:2  })
 mandy.   multiplicadores_de_velocidade = ( 5, {False: 1, True:1  })
 
 def controle_adequado_efetivo1( character ):
+    """controlar com awd"""
     character.modo_de_controle[0]( character, 0, character.modo_de_controle[1] )
 def controle_adequado_efetivo2( character ):
+    """controlar com <^>"""
     character.modo_de_controle[0]( character, 1, character.modo_de_controle[1] )
 def controle_adequado_passivo( character ):
+    """controle passivo automatico"""
     character.modo_de_controle[2]( character )
 def movimentacao_padrao( character, atividade:int ):
-    (controle_adequado_passivo, controle_adequado_efetivo1, controle_adequado_efetivo2)[atividade](character)
+    """atividade 0 -> nao controla\n
+    atividade 1 -> controle com awd\n
+    atividade 2 -> controle com <^> (setas)"""
+    (controle_adequado_passivo, controle_adequado_efetivo2)[atividade](character)
+    #(controle_adequado_passivo, controle_adequado_efetivo1, controle_adequado_efetivo2)[atividade](character)
 
 root_funcoes =       [gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
 murasaki.funcoes +=  root_funcoes
