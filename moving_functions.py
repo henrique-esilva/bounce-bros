@@ -138,7 +138,7 @@ def colisao_com_plataformas( personagem, vetor_plataformas = objetos.plataformas
 
                 sinal = math.copysign( 1, plataforma.centerx-(personagem.rect.centerx-personagem.fisica.velocidade_lateral) ) #personagem.fisica.velocidade_lateral )
 
-                personagem.rect.centerx = sinal + ( plataforma.centerx - sinal * plataforma.width/2 ) - ( 
+                personagem.rect.centerx = ((0,-1-(0, sinal)[sinal<0])[(plataforma.centerx-sinal*plataforma.width/2)<=0]+sinal) + ( plataforma.centerx - sinal * plataforma.width/2 ) - ( 
                     sinal * personagem.fisica.retangulo_do_corpo.width/2 )
 
                 personagem.fisica.velocidade_lateral = 0
