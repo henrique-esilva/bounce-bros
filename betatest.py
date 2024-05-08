@@ -50,11 +50,12 @@ def controle_adequado_efetivo2( character ):
 def controle_adequado_passivo( character ):
     """controle passivo automatico"""
     character.modo_de_controle[2]( character )
+controle_adequado_efetivo = controle_adequado_efetivo1
 def movimentacao_padrao( character, atividade:int ):
     """atividade 0 -> nao controla\n
     atividade 1 -> controle com awd\n
     atividade 2 -> controle com <^> (setas)"""
-    (controle_adequado_passivo, controle_adequado_efetivo2)[atividade](character)
+    (controle_adequado_passivo, controle_adequado_efetivo)[atividade](character)
     #(controle_adequado_passivo, controle_adequado_efetivo1, controle_adequado_efetivo2)[atividade](character)
 
 root_funcoes =       [gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
@@ -148,7 +149,7 @@ def main():
     global indice_player
     global player
 
-    pygame.time.Clock().tick(40)#40)
+    #pygame.time.Clock().tick(40)#40)
 
     alternancia_personagem()
     #gambiarra_espada()
