@@ -1,11 +1,26 @@
-from personagem import personagens as lista_personagens, monstrinho, monstrinho2, boca
+import personagem as pers
 from tileset import plataformas
 import efeitos_visuais
+from copy import copy
 
 from obj_moveis import EspadaVoadora
 
+personagens_originais = [pers.murasaki, pers.drexa, pers.arquimago, pers.cyber, pers.maguinho, pers.logan, pers.mandy]
+fantasminhas_originais = [ pers.monstrinho, pers.boca, pers.monstrinho2 ]
 
-personagens = lista_personagens
+murasaki  = pers.create_murasaki()
+drexa     = pers.create_drexa()
+arquimago = pers.create_arquimago()
+cyber     = pers.create_cyber()
+maguinho  = pers.create_maguinho()
+logan     = pers.create_logan()
+mandy     = pers.create_mandy()
+
+monstrinho  = pers.create_monstrinho()
+boca        = pers.create_boca()
+monstrinho2 = pers.create_monstrinho2()
+
+personagens = [murasaki, drexa, arquimago, cyber, maguinho, logan, mandy]
 fantasminhas = [ monstrinho, boca, monstrinho2 ]
 particulas = []
 obj_moveis = []

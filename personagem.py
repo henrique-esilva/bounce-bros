@@ -169,6 +169,43 @@ def murasaki_animation_extra_adjust( blabla:any ):
 		murasaki.current_animation = murasaki.animations.fast_walking
 #murasaki.funcoes.insert( 1, murasaki_animation_extra_adjust )
 
+def create_murasaki():
+	murasaki = Personagem()
+
+	murasaki.animations.idle.set( 'characters//murasaki//idle', 26)
+	murasaki.animations.idle.configura(0)
+	murasaki.animations.idle.turnOn()
+
+	murasaki.animations.current = murasaki.animations.idle
+
+	murasaki.animations.walking.set( 'characters//murasaki//andando-lento', 9 )
+	murasaki.animations.walking.configura(0)
+	murasaki.animations.walking.turnOn()
+
+	murasaki.animations.fast_walking = Animation()
+	murasaki.animations.db['fast_walking'] = murasaki.animations.fast_walking
+	murasaki.animations.fast_walking.set( 'characters//murasaki//andando', 23 )
+	murasaki.animations.fast_walking.configura(0)
+	murasaki.animations.fast_walking.turnOn()
+
+	murasaki.animations.breaking.set( 'characters//murasaki//freio', 59 )
+	murasaki.animations.breaking.configura(0)
+	murasaki.animations.breaking.turnOn()
+
+	# I will make a `slash` animation for murasaki. Will have also a function to attack, that switches
+	# the current animation for `slash` and places a object in scene that deals damage to enemies.
+
+	murasaki.rect = murasaki.animations.walking.content[0].get_rect()
+	murasaki.rect.left = 0
+	murasaki.fisica.coeficiente_de_rotacao = 2.1
+
+	def murasaki_animation_extra_adjust( blabla:any ):
+		if math.copysign( murasaki.fisica.velocidade_lateral, 1 ) >= 10:
+			murasaki.current_animation = murasaki.animations.fast_walking
+	#murasaki.funcoes.insert( 1, murasaki_animation_extra_adjust )
+
+	return murasaki
+
 
 
 drexa = Personagem()
@@ -186,6 +223,25 @@ drexa.rect = drexa.animations.current.content[0].get_rect()
 drexa.rect.left = 300
 drexa.fisica.coeficiente_de_rotacao = 2.5
 
+def create_drexa():
+	drexa = Personagem()
+
+	drexa.animations.current = drexa.animations.idle
+	drexa.animations.idle.set( 'characters//drexa//new//idle', 32, 63 )
+	drexa.animations.idle.configura(0)
+	drexa.animations.idle.turnOn()
+
+	drexa.animations.walking.set( 'characters//drexa//new//walk', 24 )
+	drexa.animations.walking.configura(0)
+	drexa.animations.walking.turnOn()
+
+	drexa.rect = drexa.animations.current.content[0].get_rect()
+	drexa.rect.left = 300
+	drexa.fisica.coeficiente_de_rotacao = 2.5
+
+	return drexa
+
+
 
 logan = Personagem()
 
@@ -199,6 +255,22 @@ logan.animations.walking.turnOn()
 logan.rect=logan.animations.current.content[0].get_rect()
 logan.rect.left=180
 
+def create_logan():
+	logan = Personagem()
+
+	logan.animations.idle.set( 'characters//drexa//logan//idle' )
+	logan.animations.idle.configura(0)
+	logan.animations.idle.turnOn()
+	logan.animations.walking.set( 'characters//drexa//logan//walk' )
+	logan.animations.walking.configura(0)
+	logan.animations.walking.turnOn()
+
+	logan.rect=logan.animations.current.content[0].get_rect()
+	logan.rect.left=180
+
+	return logan
+
+
 
 arquimago = Personagem()
 arquimago.animations.current = arquimago.animations.idle
@@ -210,6 +282,21 @@ arquimago.rect = arquimago.animations.current.content[0].get_rect()
 arquimago.rect.centerx = 96*5.5
 arquimago.rect.centery = 96*3.5
 arquimago.fisica.afetado_por_gravidade = False
+
+def create_arquimago():
+	arquimago = Personagem()
+	arquimago.animations.current = arquimago.animations.idle
+	arquimago.animations.idle.set( 'characters\\arquimago\idle' )
+	arquimago.animations.idle.configura(0)
+	arquimago.animations.idle.turnOn()
+
+	arquimago.rect = arquimago.animations.current.content[0].get_rect()
+	arquimago.rect.centerx = 96*5.5
+	arquimago.rect.centery = 96*3.5
+	arquimago.fisica.afetado_por_gravidade = False
+
+	return arquimago
+
 
 
 monstrinho = Personagem()
@@ -236,12 +323,39 @@ monstrinho.rect.top = 96+28
 monstrinho.rect.left = 1000
 monstrinho.fisica.retangulo_do_corpo.width = 30
 
+def create_monstrinho():
+	monstrinho = Personagem()
+	monstrinho.movimentacao_cossenoidal = Movimentacao_cossenoidal(600)
+	monstrinho.movimentacao_cossenoidal.set_frequencia( 0.2 )
+	monstrinho.movimentacao_cossenoidal.set_amplitude( 100 )
+
+	monstrinho.movimentacao_senoidal = Movimentacao_cossenoidal(600)
+	monstrinho.movimentacao_senoidal.set_frequencia( 0.4 )
+	monstrinho.movimentacao_senoidal.set_amplitude( 96 )
+	monstrinho.movimentacao_senoidal.espaco_angular = 0
+
+	monstrinho.animations.current = monstrinho.animations.idle
+	monstrinho.animations.idle.set( 'characters//boca//flutuando', 76 ) # 'characters\\boca\idle-fly' ) #pequeno mago\idle' )
+	monstrinho.animations.idle.configura(0)
+	monstrinho.animations.idle.turnOn()
+
+	#monstrinho.animations.walking.set( 'characters\\boca\\flutuando', 76 ) #pequeno mago\idle' )
+	#monstrinho.animations.walking.configura(0)
+	#monstrinho.animations.walking.turnOn()
+
+	#monstrinho.rect = monstrinho.animations.idle.content[0].get_rect()
+	monstrinho.rect.top = 96+28
+	monstrinho.rect.left = 1000
+	monstrinho.fisica.retangulo_do_corpo.width = 30
+
+	return monstrinho
+
 
 
 #######################################################################
 monstrinho2 = Personagem()
 
-monstrinho2.perseguicao_local = PerseguicaoLocal(Rect(0,0,96*4,96*4), [])
+monstrinho2.perseguicao_local = PerseguicaoLocal(Rect(96*12,96*2,96*4,96*5), [])
 
 monstrinho2.animations.current = monstrinho2.animations.idle
 monstrinho2.animations.idle.set( 'characters//boca//flutuando', 76 )
@@ -252,7 +366,21 @@ monstrinho2.rect.top = 0
 monstrinho2.rect.left = 96*5
 monstrinho2.fisica.retangulo_do_corpo.width = 30
 
+def create_monstrinho2():
+	monstrinho2 = Personagem()
 
+	monstrinho2.perseguicao_local = PerseguicaoLocal(Rect(96*12,96*2,96*4,96*5), [])
+
+	monstrinho2.animations.current = monstrinho2.animations.idle
+	monstrinho2.animations.idle.set( 'characters//boca//flutuando', 76 )
+	monstrinho2.animations.idle.configura(0)
+	monstrinho2.animations.idle.turnOn()
+
+	monstrinho2.rect.top = 0
+	monstrinho2.rect.left = 96*5
+	monstrinho2.fisica.retangulo_do_corpo.width = 30
+
+	return monstrinho2
 
 
 
@@ -268,6 +396,22 @@ boca.movimentacao_senoidal = Movimentacao_cossenoidal(600)
 boca.movimentacao_senoidal.set_frequencia( 0.4 )
 boca.movimentacao_senoidal.set_amplitude( 96 )
 boca.movimentacao_senoidal.espaco_angular = 0
+
+def create_boca():
+	boca=Personagem()
+	boca.animations.idle.set( 'characters\\boca\\flutuando', 76 )
+	boca.animations.idle.configura(0)
+	boca.animations.idle.turnOn()
+
+	boca.rect.centerx= -96*3.5
+	boca.rect.top= 96+28
+
+	boca.movimentacao_senoidal = Movimentacao_cossenoidal(600)
+	boca.movimentacao_senoidal.set_frequencia( 0.4 )
+	boca.movimentacao_senoidal.set_amplitude( 96 )
+	boca.movimentacao_senoidal.espaco_angular = 0
+
+	return boca
 
 
 
@@ -286,6 +430,24 @@ maguinho.rect = maguinho.animations.idle.content[0].get_rect()
 maguinho.rect.centerx = 96*4.5
 maguinho.rect.centery = 96*3.5
 
+def create_maguinho():
+	maguinho = Personagem()
+
+	maguinho.animations.idle.set( 'characters\\boca\\flutuando', 76 ) #( 'characters\\boca\\flutuando' ) #pequeno mago\idle' )
+	maguinho.animations.idle.configura(0)
+	maguinho.animations.idle.turnOn()
+
+	#maguinho.animations.walking.set( 'characters\\boca\\walk-fly' )
+	#maguinho.animations.walking.configura(0)
+	#maguinho.animations.walking.turnOn()
+
+	maguinho.fisica.afetado_por_gravidade = False
+	maguinho.rect = maguinho.animations.idle.content[0].get_rect()
+	maguinho.rect.centerx = 96*4.5
+	maguinho.rect.centery = 96*3.5
+
+	return maguinho
+
 
 
 cyber = Personagem()
@@ -301,6 +463,22 @@ cyber.rect = cyber.animations.idle.content[0].get_rect()
 cyber.animations.current.turnOn()
 cyber.rect.left = 250
 
+def create_cyber():
+	cyber = Personagem()
+	cyber.animations.current = cyber.animations.idle
+	cyber.animations.current.set( 'characters\\cyber\\walking' )
+	cyber.animations.current.content = cyber.animations.idle.content[:1]
+	cyber.animations.current.configura(0)
+	cyber.animations.current.turnOn()
+	cyber.animations.current = cyber.animations.walking
+	cyber.animations.current.set( 'characters\\cyber\\walking', 1 )
+	cyber.animations.current.configura(1)
+	cyber.rect = cyber.animations.idle.content[0].get_rect()
+	cyber.animations.current.turnOn()
+	cyber.rect.left = 250
+
+	return cyber
+
 
 
 mandy = Personagem()
@@ -312,6 +490,19 @@ mandy.rect = mandy.animations.idle.content[0].get_rect()
 mandy.fisica.retangulo_do_corpo = Rect( 0, 0, 25, 69 )
 mandy.rect.center = (96*9.5, 96*3.5)
 mandy.fisica.coeficiente_de_rotacao = 3.5
+
+def create_mandy():
+	mandy = Personagem()
+	mandy.animations.idle.set("characters\\mandy\\new\\idle")
+	mandy.animations.idle.turnOn()
+	mandy.animations.walking.set("characters\\mandy\\walk")
+	mandy.animations.walking.turnOn()
+	mandy.rect = mandy.animations.idle.content[0].get_rect()
+	mandy.fisica.retangulo_do_corpo = Rect( 0, 0, 25, 69 )	
+	mandy.rect.center = (96*9.5, 96*3.5)
+	mandy.fisica.coeficiente_de_rotacao = 3.5
+
+	return mandy
 
 
 

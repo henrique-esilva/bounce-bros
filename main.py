@@ -10,8 +10,8 @@ if getattr(sys, "frozen", False):
 
 import pygame
 from pygame.locals import *
+from importlib import reload
 import betatest
-
 
 
 pygame.init()
@@ -62,7 +62,7 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
 
-    pygame.time.Clock().tick(40)
+    pygame.time.Clock().tick(40) #40
 
     keys = pygame.key.get_pressed()
 
@@ -86,4 +86,47 @@ while True:
         betatest.renderiza.renderiza_tela()
 
     if game_control.state == 'game':
-        betatest.main()
+        reset_game = betatest.main()
+        if reset_game:
+            game_control.state = 'menu'
+
+            betatest.objetos.murasaki  = betatest.objetos.pers.create_murasaki()
+            betatest.objetos.drexa     = betatest.objetos.pers.create_drexa()
+            betatest.objetos.arquimago = betatest.objetos.pers.create_arquimago()
+            betatest.objetos.cyber     = betatest.objetos.pers.create_cyber()
+            betatest.objetos.maguinho  = betatest.objetos.pers.create_maguinho()
+            betatest.objetos.logan     = betatest.objetos.pers.create_logan()
+            betatest.objetos.mandy     = betatest.objetos.pers.create_mandy()
+
+            betatest.objetos.personagens.clear()
+            betatest.objetos.personagens.extend([
+                betatest.objetos.murasaki,
+                betatest.objetos.drexa,
+                betatest.objetos.arquimago,
+                betatest.objetos.cyber,
+                betatest.objetos.maguinho,
+                betatest.objetos.logan,
+                betatest.objetos.mandy
+            ])
+
+            betatest.murasaki, betatest.drexa, betatest.arquimago, betatest.cyber, betatest.maguinho, betatest.logan, betatest.mandy =\
+                betatest.objetos.murasaki, betatest.objetos.drexa, betatest.objetos.arquimago, betatest.objetos.cyber, betatest.objetos.maguinho, betatest.objetos.logan, betatest.objetos.mandy
+
+            betatest.config_personagens()
+
+            betatest.objetos.monstrinho   = betatest.objetos.pers.create_monstrinho()
+            betatest.objetos.boca         = betatest.objetos.pers.create_boca()
+            betatest.objetos.monstrinho2  = betatest.objetos.pers.create_monstrinho2()
+
+            #betatest.objetos.monstrinho  = betatest.objetos.copy(betatest.objetos.fantasminhas_originais[0])
+            #betatest.objetos.boca        = betatest.objetos.copy(betatest.objetos.fantasminhas_originais[1])
+            #betatest.objetos.monstrinho2 = betatest.objetos.copy(betatest.objetos.fantasminhas_originais[2])
+
+            betatest.objetos.fantasminhas.clear()
+            betatest.objetos.fantasminhas.extend([
+                betatest.objetos.monstrinho,
+                betatest.objetos.boca,
+                betatest.objetos.monstrinho2
+            ])
+
+            betatest.config_fantasmas()

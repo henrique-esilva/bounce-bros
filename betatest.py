@@ -1,4 +1,4 @@
-from personagem import murasaki, drexa, arquimago, cyber, maguinho, logan, mandy
+#from personagem import murasaki, drexa, arquimago, cyber, maguinho, logan, mandy
 from renderiza import *
 from moving_functions import *
 #from functools import partial
@@ -7,39 +7,17 @@ from random import randint
 import objetos
 from tileset import array as tileset_array, tamanho_dos_tiles
 
-objetos.monstrinho.funcoes.append( movimentacao_automatica_senoidal )
-objetos.monstrinho2.funcoes.append( perseguir_localmente )
-#objetos.monstrinho2.funcoes.append( colisao_com_plataformas )
-objetos.monstrinho2.perseguicao_local.alvos = objetos.personagens
-objetos.boca.funcoes.append( movimentacao_automatica_senoidal )
+murasaki, drexa, arquimago, cyber, maguinho, logan, mandy = objetos.murasaki, objetos.drexa, objetos.arquimago, objetos.cyber, objetos.maguinho, objetos.logan, objetos.mandy
+
+def config_fantasmas():
+	objetos.monstrinho.funcoes.append( movimentacao_automatica_senoidal )
+	objetos.monstrinho2.funcoes.append( perseguir_localmente )
+	#objetos.monstrinho2.funcoes.append( colisao_com_plataformas )
+	objetos.boca.funcoes.append( movimentacao_automatica_senoidal )
+	objetos.monstrinho2.perseguicao_local.alvos = objetos.personagens
 
 imagem_coracao = pygame.image.load( "efeitos\\coracao.png" )
 
-    # define conjunto de configuracao de controle ativo e passivo dos personagens
-    # assim: modo_de_controle = (funcao_de_controle_ativo, velocidade, funcao_de_controle_passivo)
-murasaki.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
-drexa.modo_de_controle = ( controle_lateral_pula, 6, desacelera_move_lateral_ajusta)
-cyber.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
-logan.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
-mandy.modo_de_controle = ( controle_lateral_pula, 13, desacelera_move_lateral_ajusta )
-arquimago.modo_de_controle = ( controle_voo, 8, desaceleracao_aerea )
-maguinho.modo_de_controle = ( controle_voo, 8, desaceleracao_aerea )
-
-    # salto base
-    # mulplicador de velocidade
-murasaki.multiplicadores_de_salto = (-29, 1  )
-drexa.   multiplicadores_de_salto = (-29, 1.5)
-cyber.   multiplicadores_de_salto = (-29, 0  )
-logan.   multiplicadores_de_salto = (-29, 1  )
-mandy.   multiplicadores_de_salto = (-29, 0.5)
-
-    # velocidade minima de ativacao
-    # multiplicador de velocidade adicional
-murasaki.multiplicadores_de_velocidade = (12, {False: 1, True:1  })
-drexa.   multiplicadores_de_velocidade = (12, {False: 1, True:1  })
-cyber.   multiplicadores_de_velocidade = ( 4, {False: 1, True:1  })
-logan.   multiplicadores_de_velocidade = ( 8, {False: 1, True:2  })
-mandy.   multiplicadores_de_velocidade = ( 5, {False: 1, True:1  })
 
 def controle_adequado_efetivo1( character ):
     """controlar com awd"""
@@ -58,14 +36,60 @@ def movimentacao_padrao( character, atividade:int ):
     (controle_adequado_passivo, controle_adequado_efetivo)[atividade](character)
     #(controle_adequado_passivo, controle_adequado_efetivo1, controle_adequado_efetivo2)[atividade](character)
 
-root_funcoes =       [gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
-murasaki.funcoes +=  root_funcoes
-drexa.funcoes +=     root_funcoes
-arquimago.funcoes += [gravidade, colisao_com_plataformas]
-cyber.funcoes +=     root_funcoes
-maguinho.funcoes +=  [gravidade, colisao_com_plataformas]
-logan.funcoes +=     root_funcoes
-mandy.funcoes +=     root_funcoes
+
+def config_personagens():
+	    # define conjunto de configuracao de controle ativo e passivo dos personagens
+	    # assim: modo_de_controle = (funcao_de_controle_ativo, velocidade, funcao_de_controle_passivo)
+	objetos.murasaki.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
+	objetos.drexa.modo_de_controle = ( controle_lateral_pula, 6, desacelera_move_lateral_ajusta)
+	objetos.cyber.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
+	objetos.logan.modo_de_controle = ( controle_lateral_pula, 7, desacelera_move_lateral_ajusta )
+	objetos.mandy.modo_de_controle = ( controle_lateral_pula, 13, desacelera_move_lateral_ajusta )
+	objetos.arquimago.modo_de_controle = ( controle_voo, 8, desaceleracao_aerea )
+	objetos.maguinho.modo_de_controle = ( controle_voo, 8, desaceleracao_aerea )
+
+	    # salto base
+	    # mulplicador de velocidade
+	objetos.murasaki.multiplicadores_de_salto = (-29, 1  )
+	objetos.drexa.   multiplicadores_de_salto = (-29, 1.5)
+	objetos.cyber.   multiplicadores_de_salto = (-29, 0  )
+	objetos.logan.   multiplicadores_de_salto = (-29, 1  )
+	objetos.mandy.   multiplicadores_de_salto = (-29, 0.5)
+
+	    # velocidade minima de ativacao
+	    # multiplicador de velocidade adicional
+	objetos.murasaki.multiplicadores_de_velocidade = (12, {False: 1, True:1  })
+	objetos.drexa.   multiplicadores_de_velocidade = (12, {False: 1, True:1  })
+	objetos.cyber.   multiplicadores_de_velocidade = ( 4, {False: 1, True:1  })
+	objetos.logan.   multiplicadores_de_velocidade = ( 8, {False: 1, True:2  })
+	objetos.mandy.   multiplicadores_de_velocidade = ( 5, {False: 1, True:1  })
+
+	root_funcoes =       [gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
+	objetos.murasaki.funcoes +=  root_funcoes
+	objetos.drexa.funcoes +=     root_funcoes
+	objetos.arquimago.funcoes += [gravidade, colisao_com_plataformas]
+	objetos.cyber.funcoes +=     root_funcoes
+	objetos.maguinho.funcoes +=  [gravidade, colisao_com_plataformas]
+	objetos.logan.funcoes +=     root_funcoes
+	objetos.mandy.funcoes +=     root_funcoes
+
+
+#objetos.monstrinho.funcoes.append( movimentacao_automatica_senoidal )
+#objetos.monstrinho2.funcoes.append( perseguir_localmente )
+##objetos.monstrinho2.funcoes.append( colisao_com_plataformas )
+#objetos.boca.funcoes.append( movimentacao_automatica_senoidal )
+config_fantasmas()
+
+
+config_personagens()
+#root_funcoes =       [gravidade, rebate, colisao_com_plataformas, efeito_de_giro]
+#murasaki.funcoes +=  root_funcoes
+#drexa.funcoes +=     root_funcoes
+#arquimago.funcoes += [gravidade, colisao_com_plataformas]
+#cyber.funcoes +=     root_funcoes
+#maguinho.funcoes +=  [gravidade, colisao_com_plataformas]
+#logan.funcoes +=     root_funcoes
+#mandy.funcoes +=     root_funcoes
 
 
 indice_player = 0
@@ -140,6 +164,8 @@ def remove_personagem( indice_player ):
             objetos.adiciona_bandeira( (objetos.personagens[y].rect.centerx, objetos.personagens[y].rect.bottom) )
             objetos.personagens.pop( y )
         y += 1
+    if not len(objetos.personagens): return True
+    return False
 
 def get_rel_char(char):
     return (pre_tela_rect.centerx - char.rect.centerx, pre_tela_rect.centery - char.rect.centery)
@@ -189,7 +215,7 @@ def main():
         renderiza_particula( i, pre_tela, rel_p1 )
         #renderiza_particula( i, mini_tela, rel_p2 )
 
-    remove_personagem(indice_player)
+    void = remove_personagem(indice_player)
 
     for i in range(len(tileset_array)):
         renderiza_quadrados( tileset_array[i][1], tamanho_dos_tiles, pre_tela, rel_p1 )
@@ -197,3 +223,6 @@ def main():
 
     desenha_coracoes()
     renderiza_tela()
+
+    return void
+
