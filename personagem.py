@@ -355,7 +355,7 @@ def create_monstrinho():
 #######################################################################
 monstrinho2 = Personagem()
 
-monstrinho2.perseguicao_local = PerseguicaoLocal(Rect(96*12,96*2,96*4,96*5), [])
+monstrinho2.perseguicao_local = PerseguicaoLocal(Rect(96*10,96*0,96*4,96*3), [])
 
 monstrinho2.animations.current = monstrinho2.animations.idle
 monstrinho2.animations.idle.set( 'characters//boca//flutuando', 76 )
@@ -369,7 +369,7 @@ monstrinho2.fisica.retangulo_do_corpo.width = 30
 def create_monstrinho2():
 	monstrinho2 = Personagem()
 
-	monstrinho2.perseguicao_local = PerseguicaoLocal(Rect(96*12,96*2,96*4,96*5), [])
+	monstrinho2.perseguicao_local = PerseguicaoLocal(Rect(96*12,96*0,96*4,96*3), [])
 
 	monstrinho2.animations.current = monstrinho2.animations.idle
 	monstrinho2.animations.idle.set( 'characters//boca//flutuando', 76 )
@@ -484,8 +484,10 @@ def create_cyber():
 mandy = Personagem()
 mandy.animations.idle.set("characters\\mandy\\new\\idle")
 mandy.animations.idle.turnOn()
-mandy.animations.walking.set("characters\\mandy\\walk")
+mandy.animations.walking.set("characters\\mandy\\new\\walk")
 mandy.animations.walking.turnOn()
+mandy.animations.breaking.set("characters\\mandy\\new\\breaking")
+mandy.animations.breaking.turnOn()
 mandy.rect = mandy.animations.idle.content[0].get_rect()
 mandy.fisica.retangulo_do_corpo = Rect( 0, 0, 25, 69 )
 mandy.rect.center = (96*9.5, 96*3.5)
@@ -495,8 +497,10 @@ def create_mandy():
 	mandy = Personagem()
 	mandy.animations.idle.set("characters\\mandy\\new\\idle")
 	mandy.animations.idle.turnOn()
-	mandy.animations.walking.set("characters\\mandy\\walk")
+	mandy.animations.walking.set("characters\\mandy\\new\\walk")
 	mandy.animations.walking.turnOn()
+	mandy.animations.breaking.set("characters\\mandy\\new\\breaking")
+	mandy.animations.breaking.turnOn()
 	mandy.rect = mandy.animations.idle.content[0].get_rect()
 	mandy.fisica.retangulo_do_corpo = Rect( 0, 0, 25, 69 )	
 	mandy.rect.center = (96*9.5, 96*3.5)
