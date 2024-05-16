@@ -195,6 +195,7 @@ def rebate( kk:__build_class__ ):
                     #i.vidas -= 1
                     break
 
+
 def is_landed( coisa ):
     landed = False
 
@@ -333,7 +334,6 @@ def controle_lateral_pula ( kk , key_set, limite = 30 ):
     kk.ajusta_retangulos()
 
 
-
 def controle_voo( personagem, key_set, limite = 30 ):
     #key_set = (
     #    (K_a, K_d, K_w, K_s),
@@ -436,6 +436,15 @@ def controla_wasd(kk):
     if tecla[K_d]:
         kk.left = 0
         kk.rect.centerx += 4
+
+
+def controle_zoom_shift( grad, keys ):
+    if keys[K_EQUALS]:
+        grad += 0.1
+    if keys[K_MINUS]:
+        grad -= 0.1
+    grad = grad%(math.pi*2)
+    return grad, (math.cos(grad), math.sin(grad))
 
 
 def loop_dentro_da_tela( kk ):

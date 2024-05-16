@@ -13,10 +13,15 @@ pygame.init()
 size = screen_size.size
 pre_size = screen_size.pre_size
 
+half_size = (pre_size[0]/4, pre_size[1]/4)
+zoom_on = False
+zoom_grad = 0
+
 pre_tela = pygame.surface.Surface(pre_size)
 pre_tela_rect = pre_tela.get_rect()
 
-mini_tela = pygame.Surface( (pre_size[0]/2,pre_size[1]) )
+half_screen = pygame.Surface( half_size )
+#mini_tela = pygame.Surface( (pre_size[0]/2,pre_size[1]) )
 
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 
@@ -27,6 +32,9 @@ flags = pygame.SCALED
 screen = pygame.display.set_mode(size)
 #pygame.display.toggle_fullscreen()
 
+
+def get_half_rect(alter):
+    return Rect(pre_size[0]*3/8+alter[0]*24, pre_size[1]*3/8+alter[1]*24, half_size[0], half_size[1])
 
 
 def impressao_de_imagem( superficie, imagem, rect, rel_coord=(0,0) ):

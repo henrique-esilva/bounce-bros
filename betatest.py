@@ -54,7 +54,7 @@ def config_personagens():
 	objetos.drexa.   multiplicadores_de_salto = (-29, 1.5)
 	objetos.cyber.   multiplicadores_de_salto = (-29, 0  )
 	objetos.logan.   multiplicadores_de_salto = (-29, 1  )
-	objetos.mandy.   multiplicadores_de_salto = (-29, 0.5)
+	objetos.mandy.   multiplicadores_de_salto = (-30, 0.5)
 
 	    # velocidade minima de ativacao
 	    # multiplicador de velocidade adicional
@@ -96,7 +96,7 @@ indice_player = 0
 tempo_de_atraso_para_alternancia = 200
 temporizador_de_atraso_de_alternancia = pygame.time.Clock()
 
-def alternancia_personagem():
+def alternancia_personagem(arg):
     global indice_player
     global tempo_de_atraso_para_alternancia
 
@@ -104,7 +104,7 @@ def alternancia_personagem():
     if tempo_de_atraso_para_alternancia > 0:
         tempo_de_atraso_para_alternancia -= temporizador_de_atraso_de_alternancia.get_time()
     else:    
-        if pygame.key.get_pressed()[pygame.K_RETURN]:
+        if arg[pygame.K_RETURN]:
             indice_player += 1
             if indice_player >= len(objetos.personagens):
                 indice_player = 0
@@ -112,13 +112,12 @@ def alternancia_personagem():
     if indice_player >= len(objetos.personagens):
         indice_player = len(objetos.personagens)-1
 
-def gambiarra_espada():
-    if pygame.key.get_pressed()[K_SPACE]:
+def gambiarra_espada(arg):
+    if arg[K_SPACE]:
         objetos.swmmon_espada_voadora(
             player.rect.center,
             (
                 {1: -10, 0:10}[player.left]+player.fisica.velocidade_lateral,
-                #(cs(8, player.fisica.velocidade_lateral)+player.fisica.velocidade_lateral, 0)[int(player.fisica.velocidade_lateral==0)],
                 -randint(10,18) +player.fisica.velocidade_de_queda
             ),
             [gravidade, colisao_com_plataformas, desacelera_move_lateral_ajusta, gatilho_islanded_delme, efeito_de_giro],
@@ -175,10 +174,10 @@ def main():
     global indice_player
     global player
 
-    #pygame.time.Clock().tick(40)#40)
+    pressed_keys = pygame.key.get_pressed()
 
-    alternancia_personagem()
-    #gambiarra_espada()
+    alternancia_personagem(pressed_keys)
+    #gambiarra_espada(pressed_keys)
 
     player = objetos.personagens[ indice_player ]
     #player2 = objetos.personagens[ indice_player-1 ]
@@ -222,6 +221,11 @@ def main():
     #    renderiza_tilesetpack( tileset_array[i], pre_tela, rel_p1, tamanho_dos_tiles )
 
     desenha_coracoes()
+
+    if pressed_keys[K_LSHIFT]:
+        renderiza.zoom_grad, zoom_shift = controle_zoom_shift(renderiza.zoom_grad, pressed_keys)
+        pre_tela.blit( pygame.transform.scale( pre_tela.subsurface(renderiza.get_half_rect(zoom_shift)), pre_size ), (0, 0) )
+
     renderiza_tela()
 
     return void
