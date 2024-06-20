@@ -453,12 +453,10 @@ def create_maguinho():
 cyber = Personagem()
 cyber.animations.current = cyber.animations.idle
 cyber.animations.current.set( 'characters\\cyber\\walking' )
-cyber.animations.current.content = cyber.animations.idle.content[:1]
 cyber.animations.current.configura(0)
 cyber.animations.current.turnOn()
 cyber.animations.current = cyber.animations.walking
-cyber.animations.current.set( 'characters\\cyber\\walking', 1 )
-cyber.animations.current.configura(1)
+cyber.animations.current.set( 'characters\\cyber\\walking' )
 cyber.rect = cyber.animations.idle.content[0].get_rect()
 cyber.animations.current.turnOn()
 cyber.rect.left = 250
@@ -466,13 +464,11 @@ cyber.rect.left = 250
 def create_cyber():
 	cyber = Personagem()
 	cyber.animations.current = cyber.animations.idle
-	cyber.animations.current.set( 'characters\\cyber\\walking' )
-	cyber.animations.current.content = cyber.animations.idle.content[:1]
+	cyber.animations.current.set( 'characters\\cyber\\idle' )
 	cyber.animations.current.configura(0)
 	cyber.animations.current.turnOn()
 	cyber.animations.current = cyber.animations.walking
-	cyber.animations.current.set( 'characters\\cyber\\walking', 1 )
-	cyber.animations.current.configura(1)
+	cyber.animations.current.set( 'characters\\cyber\\walking' )
 	cyber.rect = cyber.animations.idle.content[0].get_rect()
 	cyber.animations.current.turnOn()
 	cyber.rect.left = 250
